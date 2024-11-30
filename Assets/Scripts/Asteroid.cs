@@ -98,7 +98,7 @@ public class Asteroid : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Bullet>(out Bullet bullet))
+        if (collision.TryGetComponent<Bullet>(out _))
         {
             BreakAsteroid();
         }
