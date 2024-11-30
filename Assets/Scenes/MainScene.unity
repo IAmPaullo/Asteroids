@@ -383,10 +383,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 502130799}
-  thrustSpeed: 1
-  turnSpeed: 1
+  thrustSpeed: 200
+  turnSpeed: 100
   bulletSpawner: {fileID: 502130802}
   bulletSpawnPosition: {fileID: 2025681775}
+  gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
 --- !u!4 &502130801
 Transform:
   m_ObjectHideFlags: 0
@@ -772,7 +773,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9146351977192518839, guid: 28696356c09cb7743b258bcd7c4cb77f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 14.099998
+      value: 14.100006
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

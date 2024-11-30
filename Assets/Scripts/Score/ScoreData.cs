@@ -9,6 +9,34 @@ public class ScoreData : ScriptableObject
     [Header("High Scores")]
     public int[] highScores = new int[10];
 
+    [Header("Dependencies")]
+    public GameEvents gameEvents;
+
+    private void OnEnable()
+    {
+        if (gameEvents == null) return;
+        gameEvents.OnAsteroidDestroyed += AddScore;
+        gameEvents.OnPlayerDamaged += ResetScoreOnDeath; 
+    }
+    private void OnDisable()
+    {
+        if (gameEvents == null) return;
+        gameEvents.OnAsteroidDestroyed -= AddScore;
+        gameEvents.OnPlayerDamaged -= ResetScoreOnDeath;
+    }
+
+    private void AddScore(int points)
+    {
+        currentScore += points;
+        Debug.Log($"Score updated: {currentScore}");
+    }
+
+    private void ResetScoreOnDeath()
+    {
+        Debug.Log("Player damaged. Resetting score.");
+        currentScore = 0;
+    }
+
     public void AddHighScore(int score)
     {
         for (int i = 0; i < highScores.Length; i++)

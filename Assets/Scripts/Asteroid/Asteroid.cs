@@ -21,11 +21,12 @@ public class Asteroid : MonoBehaviour
     [SerializeField] private Sprite[] mediumAsteroidsSprites;
     [SerializeField] private Sprite[] largeAsteroidsSprites;
 
-
+    [SerializeField] private GameEvents gameEvents;
+    [SerializeField] private int points;
 
     public enum AsteroidSize { Large, Medium, Small }
 
-    private AsteroidSpawner spawner; // Refer�ncia ao spawner para pooling
+    private AsteroidSpawner spawner;
 
     public void InitializeAsteroid(AsteroidSpawner spawner, AsteroidSize size, float speed, Vector3 spawnPosition)
     {
@@ -75,6 +76,7 @@ public class Asteroid : MonoBehaviour
             AsteroidSize.Small => null,
             _ => throw new System.Exception($"Invalid Asteroid Size: {asteroidSize}")
         };
+        gameEvents.AsteroidDestroyed(points);
 
         if (nextSize != null)
         {

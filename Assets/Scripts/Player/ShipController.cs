@@ -11,6 +11,8 @@ public class ShipController : MonoBehaviour
     [Header("Shooting")]
     [SerializeField] private BulletSpawner bulletSpawner;
     [SerializeField] private Transform bulletSpawnPosition;
+    [Header("Game Events")]
+    [SerializeField] private GameEvents gameEvents;
     private bool isThrusting;
     private float turnDirection;
 
@@ -30,6 +32,7 @@ public class ShipController : MonoBehaviour
         {
             Vector2 direction = transform.up;
             bulletSpawner.SpawnBullet(bulletSpawnPosition.position, direction);
+            //gameEvents?.OnShoot(); TODO
         }
     }
 
@@ -43,5 +46,17 @@ public class ShipController : MonoBehaviour
     {
         float thrust = Input.GetAxis("Vertical") * thrustSpeed * Time.deltaTime;
         rigidBody.linearVelocity = transform.up * thrust;
+    }
+
+
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Asteroid"))
+        {
+            gameEvents?.PlayerDamaged();
+            Debug.Log("Player hit by asteroid! Life lost.");
+        }
     }
 }

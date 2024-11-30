@@ -67,6 +67,8 @@ MonoBehaviour:
   - {fileID: 5714456842437531129, guid: 9197b6d10dfce1449b7f9a6bb99153c9, type: 3}
   - {fileID: -2492203099988907705, guid: 9392b1a3b5b994a47b9d5f1216fb690d, type: 3}
   - {fileID: 4989708251766280082, guid: f01198ee637117547a731a58ae562e32, type: 3}
+  gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
+  points: 5
 --- !u!61 &1461304118502163425
 BoxCollider2D:
   m_ObjectHideFlags: 0

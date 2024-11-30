@@ -6,6 +6,9 @@ public class GameHUDManager : MonoBehaviour
     [Header("Score Data")]
     [SerializeField] private ScoreData scoreData;
 
+    [Header("Game Events")]
+    [SerializeField] private GameEvents gameEvents;
+
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI livesText;
@@ -16,6 +19,20 @@ public class GameHUDManager : MonoBehaviour
     [SerializeField] private int playerLives = 3;
     private int currentLevel = 1;
 
+    private void OnEnable()
+    {
+        if (gameEvents == null) return;
+        gameEvents.OnAsteroidDestroyed += AddScore;
+        gameEvents.OnPlayerDamaged += RemoveLife;
+        gameEvents.OnLevelUp += NextLevel;
+    }
+    private void OnDisable()
+    {
+        if (gameEvents == null) return;
+        gameEvents.OnAsteroidDestroyed -= AddScore;
+        gameEvents.OnPlayerDamaged -= RemoveLife;
+        gameEvents.OnLevelUp -= NextLevel;
+    }
     private void Start()
     {
         scoreData.ResetCurrentScore();
