@@ -14,8 +14,7 @@ public class AsteroidSpawner : MonoBehaviour
 
     private void Start()
     {
-        asteroidPool = new ObjectPool<Asteroid>(asteroidPrefab, initialPoolSize);
-
+        asteroidPool = new ObjectPool<Asteroid>(asteroidPrefab, initialPoolSize, this.transform);
         for (int i = 0; i < spawnAmount; i++)
         {
             SpawnAsteroid();

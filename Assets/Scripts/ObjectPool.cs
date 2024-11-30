@@ -37,7 +37,7 @@ public class ObjectPool<T> where T : MonoBehaviour
         else
         {
             Debug.LogWarning("Pool is empty!");
-            return CreateObject(); 
+            return CreateObject();
         }
     }
 

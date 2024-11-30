@@ -1,19 +1,35 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class ShipController : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rigidBody;
+    [Header("Movement")]
     [SerializeField] private float thrustSpeed = 1f;
     [SerializeField] private float turnSpeed = 1f;
+    [Header("Shooting")]
+    [SerializeField] private BulletSpawner bulletSpawner;
+    [SerializeField] private Transform bulletSpawnPosition;
     private bool isThrusting;
     private float turnDirection;
 
     private void Update()
     {
         UpdateShipDirection();
+        Shoot();
 
     }
+
+    private void Shoot()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))//trocar pro new input
+        {
+            Vector2 direction = transform.up;
+            bulletSpawner.SpawnBullet(bulletSpawnPosition.position, direction);
+        }
+    }
+
     private void FixedUpdate()
     {
         MoveShip();
