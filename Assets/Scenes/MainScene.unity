@@ -151,6 +151,7 @@ MonoBehaviour:
   asteroidPrefab: {fileID: 5144846625841194406, guid: 85a6b26d489083b41a335be9ce28af21, type: 3}
   initialPoolSize: 10
   spawnAmount: 4
+  spawnBounds: {x: -9, y: 9}
 --- !u!4 &376637358
 Transform:
   m_ObjectHideFlags: 0

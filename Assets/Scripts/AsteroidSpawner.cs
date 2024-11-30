@@ -6,6 +6,9 @@ public class AsteroidSpawner : MonoBehaviour
     public GameObject asteroidPrefab;
     public int initialPoolSize = 10;
     public int spawnAmount = 4;
+    [SerializeField] private Vector2 spawnBounds = Vector2.zero;
+
+
 
     private ObjectPool<Asteroid> asteroidPool;
 
@@ -26,8 +29,8 @@ public class AsteroidSpawner : MonoBehaviour
         if (asteroid != null)
         {
             Vector3 spawnPosition = new(
-                Random.Range(-10f, 10f),
-                Random.Range(-10f, 10f),
+                Random.Range(spawnBounds.x, spawnBounds.y),
+                Random.Range(spawnBounds.x, spawnBounds.y),
                 0
             );
 
