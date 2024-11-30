@@ -80,7 +80,6 @@ public class Asteroid : MonoBehaviour
         {
             SpawnChildAsteroids(nextSize.Value, 2);
         }
-
         spawner.ReturnAsteroidToPool(this);
     }
 

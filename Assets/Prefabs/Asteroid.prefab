@@ -54,9 +54,19 @@ MonoBehaviour:
   speed: 1
   asteroidSize: 0
   spriteRenderer: {fileID: 42670165281082557}
-  smallAsteroidsSprites: []
-  mediumAsteroidsSprites: []
-  largeAsteroidsSprites: []
+  smallAsteroidsSprites:
+  - {fileID: -5944249128653297893, guid: 27575289689260346a5fa5a563c2ad50, type: 3}
+  - {fileID: -2059301777156014197, guid: 00d640f4d55a38e4aafa3010919e78da, type: 3}
+  mediumAsteroidsSprites:
+  - {fileID: 4596883188560925386, guid: 5fcf68e94090ef04684ea31eef342bbd, type: 3}
+  - {fileID: 959803505507294820, guid: 3f20483cc8f76b34199aa074423475c7, type: 3}
+  - {fileID: 5098249006986496273, guid: f220020ff8b69164aa6b5ceacce06dae, type: 3}
+  - {fileID: -1299205367528621936, guid: ad9583c1401fcde4287fe71411681f51, type: 3}
+  largeAsteroidsSprites:
+  - {fileID: 1474014828341702776, guid: 10e236c10af46604eb43590be3076645, type: 3}
+  - {fileID: 5714456842437531129, guid: 9197b6d10dfce1449b7f9a6bb99153c9, type: 3}
+  - {fileID: -2492203099988907705, guid: 9392b1a3b5b994a47b9d5f1216fb690d, type: 3}
+  - {fileID: 4989708251766280082, guid: f01198ee637117547a731a58ae562e32, type: 3}
 --- !u!61 &1461304118502163425
 BoxCollider2D:
   m_ObjectHideFlags: 0

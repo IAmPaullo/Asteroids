@@ -16,9 +16,12 @@ public class ShipController : MonoBehaviour
 
     private void Update()
     {
-        UpdateShipDirection();
+        HandleMovement();
         Shoot();
-
+    }
+    private void FixedUpdate()
+    {
+        HandleThrust();
     }
 
     private void Shoot()
@@ -30,27 +33,15 @@ public class ShipController : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        MoveShip();
-    }
 
-    private void MoveShip()
+    private void HandleMovement()
     {
-        if (isThrusting)
-            rigidBody.AddForce(transform.up * thrustSpeed);
-        if (turnDirection != 0f)
-            rigidBody.AddTorque(turnDirection * turnSpeed);
+        float rotation = -Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime;
+        transform.Rotate(0, 0, rotation);
     }
-
-    private void UpdateShipDirection()
+    private void HandleThrust()
     {
-        isThrusting = Input.GetKey(KeyCode.UpArrow);
-        if (Input.GetKey(KeyCode.LeftArrow))
-            turnDirection = 1.0f;
-        else if (Input.GetKey(KeyCode.RightArrow))
-            turnDirection = -1.0f;
-        else
-            turnDirection = 0.0f;
+        float thrust = Input.GetAxis("Vertical") * thrustSpeed * Time.deltaTime;
+        rigidBody.linearVelocity = transform.up * thrust;
     }
 }
