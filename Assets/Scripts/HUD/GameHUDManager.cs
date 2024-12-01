@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameHUDManager : MonoBehaviour
 {
     [Header("Score Data")]
-    [SerializeField] private ScoreData scoreData; 
+    [SerializeField] private ScoreData scoreData;
 
     [Header("Game Events")]
     [SerializeField] private GameEvents gameEvents;
@@ -17,12 +17,12 @@ public class GameHUDManager : MonoBehaviour
     private void OnEnable()
     {
         gameEvents.HUDUpdate += UpdateHUD;
-        UpdateHUD(); 
+        UpdateHUD();
     }
 
     private void OnDisable()
     {
-        gameEvents.HUDUpdate -= UpdateHUD; 
+        gameEvents.HUDUpdate -= UpdateHUD;
     }
 
     private void UpdateHUD()

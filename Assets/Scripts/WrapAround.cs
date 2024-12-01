@@ -3,9 +3,8 @@ using UnityEngine;
 public class WrapAround : MonoBehaviour
 {
     [SerializeField] private bool enableWrapAround = true;
+    [SerializeField] private bool playWrapSound;
     [SerializeField] private float wrapBuffer = 0.5f;
-
-    [SerializeField] private AudioClip wrapSound;
 
     [SerializeField] private GameEvents gameEvents;
 
@@ -22,7 +21,8 @@ public class WrapAround : MonoBehaviour
 
     private void Update()
     {
-        if (enableWrapAround && TryWrap())
+        if (!enableWrapAround) return;
+        if (TryWrap())
         {
             PlayWrapSound();
         }
@@ -30,10 +30,8 @@ public class WrapAround : MonoBehaviour
 
     private void PlayWrapSound()
     {
-        if (wrapSound != null)
-        {
+        if (playWrapSound)
             gameEvents.WrapAround();
-        }
     }
 
     private bool TryWrap()
@@ -65,4 +63,12 @@ public class WrapAround : MonoBehaviour
         }
         return coord;
     }
+
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+
+    }
+#endif
 }

@@ -1,5 +1,5 @@
-using UnityEngine;
 using System;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "GameEvents", menuName = "Game/GameEvents")]
 public class GameEvents : ScriptableObject

@@ -33,7 +33,7 @@ public class Bullet : MonoBehaviour
 
         if (collision.TryGetComponent<Asteroid>(out Asteroid asteroid))
         {
-            asteroid.BreakAsteroid(); 
+            asteroid.BreakAsteroid();
             spawner.ReturnBulletToPool(this);
         }
     }
