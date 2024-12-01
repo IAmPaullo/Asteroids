@@ -32,11 +32,9 @@ public class ShipController : MonoBehaviour
         {
             Vector2 direction = transform.up;
             bulletSpawner.SpawnBullet(bulletSpawnPosition.position, direction);
-            //gameEvents?.OnShoot(); TODO
+            gameEvents.OnShoot();
         }
     }
-
-
     private void HandleMovement()
     {
         float rotation = -Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime;
@@ -47,10 +45,6 @@ public class ShipController : MonoBehaviour
         float thrust = Input.GetAxis("Vertical") * thrustSpeed * Time.deltaTime;
         rigidBody.linearVelocity = transform.up * thrust;
     }
-
-
-
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Asteroid"))

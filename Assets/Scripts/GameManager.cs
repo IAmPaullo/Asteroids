@@ -43,11 +43,6 @@ public class GameManager : MonoBehaviour
         Action processedAction = playerLives <= 0 ? GameOver : UpdateHUD;
 
         processedAction?.Invoke();
-
-        //if (playerLives <= 0)
-        //    GameOver();
-        //else
-        //    UpdateHUD();
     }
 
     private void UpdateHUD()
