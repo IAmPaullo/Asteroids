@@ -54,13 +54,14 @@ public class AudioManager : MonoBehaviour
         PlaySound(audioClipsConfig.GetRandomDamageSound());
     }
 
-    private void PlaySound(AudioClip clip)
+    private void PlaySound(AudioClip clip, bool randomPitch = false)
     {
         if (clip == null) return;
 
         if (audioSourcePool.Count > 0)
         {
             AudioSource audioSource = audioSourcePool.Dequeue();
+            audioSource.pitch = randomPitch ? Random.Range(0, 1.5f) : default;
             audioSource.PlayOneShot(clip);
             StartCoroutine(ReturnAudioSourceToPool(audioSource, clip.length));
         }

@@ -1,25 +1,48 @@
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(fileName = "AudioClipsConfig", menuName = "Game/AudioClips")]
 public class AudioClipsConfig : ScriptableObject
 {
-    [SerializeField] private AudioClip[] shootSound;
-    [SerializeField] private AudioClip[] explosionSound;
-    [SerializeField] private AudioClip[] playerDamagedSound;
+    [SerializeField] private SoundCategory shootSounds;
+    [SerializeField] private SoundCategory explosionSounds;
+    [SerializeField] private SoundCategory playerDamagedSounds;
 
-    public AudioClip GetRandomShootSound()
+    public AudioClip GetRandomShootSound() => shootSounds?.GetRandomClip();
+    public AudioClip GetRandomExplosionSound() => explosionSounds?.GetRandomClip();
+    public AudioClip GetRandomDamageSound() => playerDamagedSounds?.GetRandomClip();
+
+    public AudioClip GetRandomSound(SoundCategory category) => category?.GetRandomClip();
+
+    public AudioClip GetSpecificSound(SoundCategory category, int index) =>
+        category?.GetSpecificClip(index);
+}
+
+[Serializable]
+public class SoundCategory
+{
+    [SerializeField] private string categoryName;
+    [SerializeField] private AudioClip[] clips;
+
+    public AudioClip GetRandomClip()
     {
-        int rnd = Random.Range(0, shootSound.Length);
-        return shootSound[rnd];
+        if (clips == null || clips.Length == 0)
+        {
+            Debug.LogWarning($"No clips found in category: {categoryName}");
+            return null;
+        }
+        return clips[UnityEngine.Random.Range(0, clips.Length)];
     }
-    public AudioClip GetRandomExplosionSound()
+
+    public AudioClip GetSpecificClip(int index)
     {
-        int rnd = Random.Range(0, explosionSound.Length);
-        return explosionSound[rnd];
+        if (clips == null || index < 0 || index >= clips.Length)
+        {
+            Debug.LogWarning($"Invalid clip index in category: {categoryName}");
+            return null;
+        }
+        return clips[index];
     }
-    public AudioClip GetRandomDamageSound()
-    {
-        int rnd = Random.Range(0, playerDamagedSound.Length);
-        return playerDamagedSound[rnd];
-    }
+
+    public int ClipCount => clips?.Length ?? 0;
 }

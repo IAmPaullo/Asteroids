@@ -12,16 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0dfaa7440e9b594aac761619d8f6718, type: 3}
   m_Name: AudioClips
   m_EditorClassIdentifier: 
-  shootSound:
-  - {fileID: 8300000, guid: 7f3e070d592e80b4a938c1474f560668, type: 3}
-  - {fileID: 8300000, guid: c337e9f098b18ad45a9944483d159eae, type: 3}
-  - {fileID: 8300000, guid: 3da84a5976c80cb43af0ea25c08c7a0a, type: 3}
-  - {fileID: 8300000, guid: 34b17bcf7b705a94ca7680c2e502c373, type: 3}
-  - {fileID: 8300000, guid: c810fed1225bb55409f03a34eb57f952, type: 3}
-  explosionSound:
-  - {fileID: 8300000, guid: 6c5707ed7fdc41349a3ec07e3629a1c5, type: 3}
-  - {fileID: 8300000, guid: 70f008729a5c8de469334cdb981dae1b, type: 3}
-  - {fileID: 8300000, guid: f9985066c74876040ae4c78cd000eec8, type: 3}
-  - {fileID: 8300000, guid: b3c5b33d7aa836e489ad17891cb054f6, type: 3}
-  - {fileID: 8300000, guid: 1812f882317580f40a914241b3458445, type: 3}
-  playerDamagedSound: []
+  shootSounds:
+    categoryName: Shoot Sound
+    clips:
+    - {fileID: 8300000, guid: 7f3e070d592e80b4a938c1474f560668, type: 3}
+    - {fileID: 8300000, guid: c337e9f098b18ad45a9944483d159eae, type: 3}
+    - {fileID: 8300000, guid: 3da84a5976c80cb43af0ea25c08c7a0a, type: 3}
+    - {fileID: 8300000, guid: 34b17bcf7b705a94ca7680c2e502c373, type: 3}
+    - {fileID: 8300000, guid: c810fed1225bb55409f03a34eb57f952, type: 3}
+  explosionSounds:
+    categoryName: Asteroid Explosion
+    clips:
+    - {fileID: 8300000, guid: 6c5707ed7fdc41349a3ec07e3629a1c5, type: 3}
+    - {fileID: 8300000, guid: 70f008729a5c8de469334cdb981dae1b, type: 3}
+    - {fileID: 8300000, guid: f9985066c74876040ae4c78cd000eec8, type: 3}
+    - {fileID: 8300000, guid: b3c5b33d7aa836e489ad17891cb054f6, type: 3}
+    - {fileID: 8300000, guid: 1812f882317580f40a914241b3458445, type: 3}
+  playerDamagedSounds:
+    categoryName: Player Damage
+    clips:
+    - {fileID: 8300000, guid: 4c4c4549c13eb804b8d6ded02023c75d, type: 3}
+    - {fileID: 8300000, guid: bfacd8c71184228418a9778ced3acbbf, type: 3}
+    - {fileID: 8300000, guid: 27f5c73783ea78c43af27fd557766dc1, type: 3}
+    - {fileID: 8300000, guid: 4b8793a7e951cfa458f18a262593b1ba, type: 3}
+    - {fileID: 8300000, guid: 84564895254dd414f9a31527f844d142, type: 3}
