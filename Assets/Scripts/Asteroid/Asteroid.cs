@@ -5,10 +5,6 @@ public class Asteroid : MonoBehaviour
     [Header("Misc References")]
     [SerializeField] private Rigidbody2D rigidBody;
 
-    [Header("Size")]
-    [SerializeField] private float currentSize;
-    [SerializeField] private float minSize = 0.35f;
-    [SerializeField] private float maxSize = 1.35f;
 
     [Header("Settings")]
     [SerializeField] private float speed;
@@ -25,23 +21,22 @@ public class Asteroid : MonoBehaviour
     [SerializeField] private int points;
 
     public enum AsteroidSize { Large, Medium, Small }
-
     private AsteroidSpawner spawner;
+
+    private bool isDestroyed = false;
+
     public void InitializeAsteroid(AsteroidSpawner spawner, AsteroidSize size, float speed, Vector3 spawnPosition)
     {
         this.spawner = spawner;
         this.asteroidSize = size;
         this.speed = speed;
-
-        currentSize = Random.Range(minSize, maxSize);
-        transform.localScale = Vector3.one * currentSize;
-
-
+        isDestroyed = false;
+        spriteRenderer.sprite = GetAsteroidSprite(size);
         transform.position = spawnPosition;
         SetRandomDirection();
     }
 
-    private Sprite SetAsteroidSprite(AsteroidSize size)
+    private Sprite GetAsteroidSprite(AsteroidSize size)
     {
         Sprite[] selectedArray = size switch
         {
@@ -68,8 +63,9 @@ public class Asteroid : MonoBehaviour
 
     public void BreakAsteroid()
     {
+        isDestroyed = true;
         gameEvents.AsteroidDestroyed(points);
-        
+
         AsteroidSize? nextSize = asteroidSize switch
         {
             AsteroidSize.Large => AsteroidSize.Medium,
@@ -82,7 +78,9 @@ public class Asteroid : MonoBehaviour
         {
             SpawnChildAsteroids(nextSize.Value, 2);
         }
+        gameObject.SetActive(false);
         spawner.ReturnAsteroidToPool(this);
+
     }
 
     private void SpawnChildAsteroids(AsteroidSize size, int quantity)
@@ -92,20 +90,25 @@ public class Asteroid : MonoBehaviour
             Asteroid child = spawner.GetAsteroidFromPool();
             if (child != null)
             {
-                child.InitializeAsteroid(spawner, size, speed, transform.position);
+                Vector3 spawnPosition = transform.position;
+                float randomOffset = 0.5f;
+                spawnPosition += new Vector3(
+                    Random.Range(-randomOffset, randomOffset),
+                    Random.Range(-randomOffset, randomOffset),
+                    0
+                );
+                child.InitializeAsteroid(spawner, size, Random.Range(1f, 3f), spawnPosition);
             }
         }
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (isDestroyed) return;
         if (collision.TryGetComponent<Bullet>(out _))
         {
             BreakAsteroid();
         }
     }
-    private void OnBecameInvisible()
-    {
-        spawner.ReturnAsteroidToPool(this);
-    }
+
+
 }

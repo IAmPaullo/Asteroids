@@ -22,26 +22,27 @@ public class AsteroidSpawner : MonoBehaviour
     }
     private void Start()
     {
-        asteroidPool = new ObjectPool<Asteroid>(asteroidPrefab, initialPoolSize, this.transform);
-        for (int i = 0; i < spawnAmount; i++)
-        {
-            SpawnAsteroids();
-        }
+
     }
 
     private void SpawnAsteroids()
     {
-        Asteroid asteroid = asteroidPool.GetObject();
-
-        if (asteroid != null)
+        if (asteroidPool == null)
+            asteroidPool = new ObjectPool<Asteroid>(asteroidPrefab, initialPoolSize, this.transform);
+        for (int i = 0; i < spawnAmount; i++)
         {
-            Vector3 spawnPosition = new(
-                Random.Range(spawnBounds.x, spawnBounds.y),
-                Random.Range(spawnBounds.x, spawnBounds.y),
-                0
-            );
 
-            asteroid.InitializeAsteroid(this, Asteroid.AsteroidSize.Large, Random.Range(1f, 3f), spawnPosition);
+            Asteroid asteroid = asteroidPool.GetObject();
+
+            if (asteroid != null)
+            {
+                Vector3 spawnPosition = new(
+                    Random.Range(spawnBounds.x, spawnBounds.y),
+                    Random.Range(spawnBounds.x, spawnBounds.y),
+                    0
+                );
+                asteroid.InitializeAsteroid(this, Asteroid.AsteroidSize.Large, Random.Range(1f, 3f), spawnPosition);
+            }
         }
     }
 

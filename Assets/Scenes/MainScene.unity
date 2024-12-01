@@ -183,10 +183,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroidPrefab: {fileID: 5144846625841194406, guid: 85a6b26d489083b41a335be9ce28af21, type: 3}
-  initialPoolSize: 10
+  initialPoolSize: 20
   spawnAmount: 4
   spawnBounds: {x: -9, y: 9}
-  gameEvents: {fileID: 0}
+  gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
 --- !u!4 &376637358
 Transform:
   m_ObjectHideFlags: 0
