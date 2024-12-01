@@ -13,11 +13,13 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         gameEvents.OnPlayerDamaged += ProcessPlayerDamage;
+        gameEvents.OnAsteroidDestroyed += AddScore;
     }
 
     private void OnDisable()
     {
         gameEvents.OnPlayerDamaged -= ProcessPlayerDamage;
+        gameEvents.OnAsteroidDestroyed -= AddScore;
     }
     private void Start()
     {

@@ -586,6 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ede67d56867d7b4bb175a844750f1b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreData: {fileID: 11400000, guid: 7f3cd8c9caa9bc242b4a400968551653, type: 2}
   playerLives: 3
   gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
 --- !u!4 &563279275
@@ -875,7 +876,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a62cb1d91c2ed4989044a712a9bddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 563279274}
+  scoreData: {fileID: 11400000, guid: 7f3cd8c9caa9bc242b4a400968551653, type: 2}
+  gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
   scoreText: {fileID: 3980061800519697546}
   livesText: {fileID: 3980061800519697545}
   levelText: {fileID: 3980061800519697544}

@@ -11,7 +11,7 @@ public class GameEvents : ScriptableObject
 
     public void AsteroidDestroyed(int points)
     {
-        OnAsteroidDestroyed?.Invoke(points); 
+        OnAsteroidDestroyed?.Invoke(points);
     }
 
     public void PlayerDamaged()
