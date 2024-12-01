@@ -16,12 +16,14 @@ public class GameHUDManager : MonoBehaviour
 
     private void OnEnable()
     {
+        gameEvents.OnLevelStart += UpdateHUD;
         gameEvents.HUDUpdate += UpdateHUD;
         UpdateHUD();
     }
 
     private void OnDisable()
     {
+        gameEvents.OnLevelStart -= UpdateHUD;
         gameEvents.HUDUpdate -= UpdateHUD;
     }
 

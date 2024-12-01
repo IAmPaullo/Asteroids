@@ -1,27 +1,35 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AsteroidSpawner : MonoBehaviour
 {
     [Header("Asteroid Pool Settings")]
-    public GameObject asteroidPrefab;
-    public int initialPoolSize = 10;
-    public int spawnAmount = 4;
+    [SerializeField] private GameObject asteroidPrefab;
+    [SerializeField] private int initialPoolSize = 10;
+    [SerializeField] private int spawnAmount = 4;
     [SerializeField] private Vector2 spawnBounds = Vector2.zero;
-
-
-
+    [Space]
+    [SerializeField] private GameEvents gameEvents;
     private ObjectPool<Asteroid> asteroidPool;
+    private void OnEnable()
+    {
+        gameEvents.OnLevelStart += SpawnAsteroids;
+    }
 
+    private void OnDisable()
+    {
+        gameEvents.OnLevelStart -= SpawnAsteroids;
+    }
     private void Start()
     {
         asteroidPool = new ObjectPool<Asteroid>(asteroidPrefab, initialPoolSize, this.transform);
         for (int i = 0; i < spawnAmount; i++)
         {
-            SpawnAsteroid();
+            SpawnAsteroids();
         }
     }
 
-    private void SpawnAsteroid()
+    private void SpawnAsteroids()
     {
         Asteroid asteroid = asteroidPool.GetObject();
 

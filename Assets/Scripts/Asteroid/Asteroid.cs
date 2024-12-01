@@ -27,7 +27,6 @@ public class Asteroid : MonoBehaviour
     public enum AsteroidSize { Large, Medium, Small }
 
     private AsteroidSpawner spawner;
-
     public void InitializeAsteroid(AsteroidSpawner spawner, AsteroidSize size, float speed, Vector3 spawnPosition)
     {
         this.spawner = spawner;
@@ -69,6 +68,8 @@ public class Asteroid : MonoBehaviour
 
     public void BreakAsteroid()
     {
+        gameEvents.AsteroidDestroyed(points);
+        
         AsteroidSize? nextSize = asteroidSize switch
         {
             AsteroidSize.Large => AsteroidSize.Medium,
@@ -76,7 +77,6 @@ public class Asteroid : MonoBehaviour
             AsteroidSize.Small => null,
             _ => throw new System.Exception($"Invalid Asteroid Size: {asteroidSize}")
         };
-        gameEvents.AsteroidDestroyed(points);
 
         if (nextSize != null)
         {

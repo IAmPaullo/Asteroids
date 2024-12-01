@@ -60,6 +60,10 @@ public class ScoreData : ScriptableObject
             }
         }
     }
+    public void NextLevel()
+    {
+        currentLevel++;
+    }
     public void Reset()
     {
         currentScore = 0;

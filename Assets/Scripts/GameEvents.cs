@@ -4,6 +4,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameEvents", menuName = "Game/GameEvents")]
 public class GameEvents : ScriptableObject
 {
+
+    #region Level Events
+    public event Action OnLevelStart;
+    public event Action OnLevelComplete;
+    #endregion
+
     public event Action<int> OnAsteroidDestroyed;
     public event Action OnWrapAround;
     public event Action OnPlayerDamaged;
@@ -41,6 +47,8 @@ public class GameEvents : ScriptableObject
     {
         OnShootSound?.Invoke();
     }
+
+    #region Sound Events
     public void PlayExplosionSound()
     {
         OnExplosionSound?.Invoke();
@@ -49,4 +57,16 @@ public class GameEvents : ScriptableObject
     {
         OnPlayerDamagedSound?.Invoke();
     }
+    #endregion
+
+    #region Level Manager Events
+    public void LevelStart()
+    {
+        OnLevelStart?.Invoke();
+    }
+    public void LevelComplete()
+    {
+        OnLevelComplete?.Invoke();
+    }
+    #endregion
 }
