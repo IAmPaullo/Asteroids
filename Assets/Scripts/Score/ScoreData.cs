@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ScoreData", menuName = "Game/ScoreData")]
 public class ScoreData : ScriptableObject
 {
+
     [Header("Current Score")]
     public int currentScore;
 
@@ -12,11 +13,18 @@ public class ScoreData : ScriptableObject
     [Header("Dependencies")]
     public GameEvents gameEvents;
 
+    [Header("Lives")]
+    [SerializeField] private int startingLivesAmount;
+    public int playerLives;
+
+    [Header("Current Level")]
+    public int currentLevel;
+
     private void OnEnable()
     {
         if (gameEvents == null) return;
         gameEvents.OnAsteroidDestroyed += AddScore;
-        gameEvents.OnPlayerDamaged += ResetScoreOnDeath; 
+        gameEvents.OnPlayerDamaged += ResetScoreOnDeath;
     }
     private void OnDisable()
     {
@@ -52,8 +60,10 @@ public class ScoreData : ScriptableObject
             }
         }
     }
-    public void ResetCurrentScore()
+    public void Reset()
     {
         currentScore = 0;
+        playerLives = startingLivesAmount;
+        currentLevel = 1;
     }
 }

@@ -56,7 +56,7 @@ public class ShipController : MonoBehaviour
         if (collision.collider.CompareTag("Asteroid"))
         {
             gameEvents?.PlayerDamaged();
-            Debug.Log("Player hit by asteroid! Life lost.");
+            Debug.Log("Player hit by asteroid");
         }
     }
 }

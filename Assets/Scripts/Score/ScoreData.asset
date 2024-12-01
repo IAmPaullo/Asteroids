@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: ScoreData
   m_EditorClassIdentifier: 
   currentScore: 0
-  highScores: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+  highScores: e8030000000000000000000000000000000000000000000000000000000000000000000000000000
   gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
+  startingLivesAmount: 3
+  playerLives: 0
+  currentLevel: 0

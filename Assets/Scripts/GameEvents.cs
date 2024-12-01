@@ -6,7 +6,8 @@ public class GameEvents : ScriptableObject
 {
     public event Action<int> OnAsteroidDestroyed;
     public event Action OnPlayerDamaged;        
-    public event Action OnLevelUp;              
+    public event Action OnLevelUp;
+    public event Action HUDUpdate;
 
     public void AsteroidDestroyed(int points)
     {
@@ -21,5 +22,9 @@ public class GameEvents : ScriptableObject
     public void LevelUp()
     {
         OnLevelUp?.Invoke(); 
+    }
+    public void HUDUpdated()
+    {
+        HUDUpdate?.Invoke();
     }
 }
