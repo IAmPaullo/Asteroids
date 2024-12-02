@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameEvents : ScriptableObject
 {
 
+    public event Action OnGameReset;
     #region Level Events
     public event Action<int> OnSetAsteroidsToSpawn;
     public event Action OnLevelStart;
@@ -101,6 +102,9 @@ public class GameEvents : ScriptableObject
         OnLevelComplete?.Invoke();
     }
     #endregion
-
+    public void GameReset()
+    {
+        OnGameReset?.Invoke();
+    }
 
 }

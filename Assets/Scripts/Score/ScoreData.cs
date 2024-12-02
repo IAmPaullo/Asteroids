@@ -48,7 +48,12 @@ public class ScoreData : ScriptableObject
     private void OnPlayerDamaged()
     {
         currentLives--;
-        Debug.Log($"Lives updated: {currentLives}");
+        Debug.LogWarning($"Lives updated: {currentLives}");
+        if (currentLives <= 0)
+        {
+            Debug.LogWarning("Player is dead!");
+            gameEvents.PlayerDeath();
+        }
     }
     public void AddHighScore(int score)
     {
@@ -67,7 +72,7 @@ public class ScoreData : ScriptableObject
     }
     public void OnPlayerDeath()
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
     public void NextLevel()
     {

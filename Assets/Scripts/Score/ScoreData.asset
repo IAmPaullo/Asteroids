@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd67e332bf69ef4d9c0eaf8e791b75e, type: 3}
   m_Name: ScoreData
   m_EditorClassIdentifier: 
-  startingLivesAmount: 10
+  startingLivesAmount: 1
   highScores: e8030000000000000000000000000000000000000000000000000000000000000000000000000000
-  currentLives: 10
+  currentLives: 1
   currentScore: 0
   currentLevel: 1
   gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}

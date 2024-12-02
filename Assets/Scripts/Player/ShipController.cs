@@ -21,11 +21,13 @@ public class ShipController : MonoBehaviour
     private void OnEnable()
     {
         gameEvents.OnPlayerDeath += ShipDeath;
+        gameEvents.OnGameReset += ShipReset;
     }
 
     private void OnDisable()
     {
         gameEvents.OnPlayerDeath -= ShipDeath;
+        gameEvents.OnGameReset -= ShipReset;
     }
 
 
@@ -99,7 +101,10 @@ public class ShipController : MonoBehaviour
         isAlive = false;
         rigidBody.linearVelocity = Vector2.zero;
         rigidBody.angularVelocity = 0f;
-
+    }
+    private void ShipReset()
+    {
+        isAlive = true;
     }
 
 
