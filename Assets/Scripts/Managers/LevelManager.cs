@@ -32,7 +32,8 @@ public class LevelManager : MonoBehaviour
     {
         remainingAsteroids = CalculateAsteroidsForLevel();
 
-        Debug.Log($"Starting Level with {remainingAsteroids} asteroids.");
+        Debug.Log($"Starting Level {scoreData.currentLevel} with {remainingAsteroids} asteroids.");
+
         gameEvents.SetAsteroidsToSpawn(remainingAsteroids);
         gameEvents.LevelStart();
     }

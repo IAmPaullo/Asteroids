@@ -29,9 +29,9 @@ public class GameHUDManager : MonoBehaviour
 
     private void UpdateHUD()
     {
-        scoreText.text = $"Score: {scoreData.currentScore}";
-        livesText.text = $"Lives: {scoreData.playerLives}";
-        levelText.text = $"Level: {scoreData.currentLevel}";
-
+        scoreText.text = $" {scoreData.currentScore}";
+        livesText.text = $" {scoreData.currentLives}";
+        levelText.text = $" {scoreData.currentLevel}";
     }
+
 }

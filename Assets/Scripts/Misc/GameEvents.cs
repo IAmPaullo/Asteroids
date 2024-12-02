@@ -13,6 +13,7 @@ public class GameEvents : ScriptableObject
 
     #region Player Events
     public event Action OnPlayerDamaged;
+    public event Action OnPlayerDeath;
     public event Action<int> OnAsteroidDestroyed;
     public event Action<int> OnAddAsteroids;
     public event Action OnLevelUp;
@@ -32,6 +33,7 @@ public class GameEvents : ScriptableObject
     #region Player Methods
     public void AsteroidDestroyed(int points)
     {
+        if (points <= 0) return;
         OnAsteroidDestroyed?.Invoke(points);
         PlayExplosionSound();
     }
@@ -42,6 +44,10 @@ public class GameEvents : ScriptableObject
     public void PlayerDamaged()
     {
         OnPlayerDamaged?.Invoke();
+    }
+    public void PlayerDeath()
+    {
+        OnPlayerDeath?.Invoke();
     }
     public void LevelUp()
     {
@@ -59,6 +65,7 @@ public class GameEvents : ScriptableObject
     {
         OnThrusterStart?.Invoke();
     }
+
 
     public void ThrusterStop()
     {

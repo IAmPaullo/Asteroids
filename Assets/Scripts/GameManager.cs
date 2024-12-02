@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        scoreData.Reset();
+        scoreData.ResetData();
         UpdateHUD();
     }
     public void AddScore(int points)

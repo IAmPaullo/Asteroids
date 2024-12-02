@@ -4,33 +4,38 @@ using UnityEngine;
 public class ScoreData : ScriptableObject
 {
 
-    [Header("Current Score")]
-    public int currentScore;
+
+    [SerializeField] private int startingLivesAmount;
 
     [Header("High Scores")]
     public int[] highScores = new int[10];
 
-    [Header("Dependencies")]
-    public GameEvents gameEvents;
-
     [Header("Lives")]
-    [SerializeField] private int startingLivesAmount;
-    public int playerLives;
+    public int currentLives;
+
+    [Header("Current Score")]
+    public int currentScore;
 
     [Header("Current Level")]
     public int currentLevel;
+
+    [Header("Dependencies")]
+    public GameEvents gameEvents;
 
     private void OnEnable()
     {
         if (gameEvents == null) return;
         gameEvents.OnAsteroidDestroyed += AddScore;
         gameEvents.OnPlayerDamaged += ResetScoreOnDeath;
+        gameEvents.OnPlayerDeath += OnPlayerDeath;
     }
     private void OnDisable()
     {
         if (gameEvents == null) return;
         gameEvents.OnAsteroidDestroyed -= AddScore;
         gameEvents.OnPlayerDamaged -= ResetScoreOnDeath;
+        gameEvents.OnPlayerDeath -= OnPlayerDeath;
+        ResetData();
     }
 
     private void AddScore(int points)
@@ -41,8 +46,8 @@ public class ScoreData : ScriptableObject
 
     private void ResetScoreOnDeath()
     {
-        Debug.Log("Player damaged. Resetting score.");
-        currentScore = 0;
+        //Debug.Log("Player damaged. Resetting score.");
+        //currentScore = 0;
     }
 
     public void AddHighScore(int score)
@@ -60,14 +65,19 @@ public class ScoreData : ScriptableObject
             }
         }
     }
+    public void OnPlayerDeath()
+    {
+
+    }
     public void NextLevel()
     {
         currentLevel++;
+        gameEvents.HUDUpdated();
     }
-    public void Reset()
+    public void ResetData()
     {
         currentScore = 0;
-        playerLives = startingLivesAmount;
+        currentLives = startingLivesAmount;
         currentLevel = 1;
     }
 }

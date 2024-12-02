@@ -49,19 +49,20 @@ public class AnimationHandler : MonoBehaviour
     private void HandlePlayerDamage()
     {
         ShakeCamera();
-
+        AnimateTextChange(lifeText, scoreData.currentLives + 1, scoreData.currentLives,
+            Color.red, Color.white, 0.75f, "Lives: ");
     }
 
     private void HandleLevelComplete()
     {
-        int level = scoreData.currentLevel;
-        AnimateTextChange(scoreText, level, level + 1, Color.green, Color.white, .75f);
+        AnimateTextChange(levelText, scoreData.currentLevel - 1, scoreData.currentLevel,
+            Color.green, Color.white, 0.75f, "Level: ");
     }
 
     private void HandleAsteroidDestroyed(int points)
     {
-        int score = scoreData.currentScore;
-        AnimateTextChange(scoreText, score, score + points, Color.green, Color.white, .75f);
+        AnimateTextChange(scoreText, scoreData.currentScore - points, scoreData.currentScore,
+            Color.green, Color.white, 0.75f, "Score: ");
     }
 
     private void ShakeCamera()
@@ -102,13 +103,18 @@ public class AnimationHandler : MonoBehaviour
             .SetLoops(2, LoopType.Yoyo)
             .SetEase(Ease.InOutSine);
     }
-    public static void AnimateTextChange(TextMeshProUGUI scoreText, int startScore, int endScore, Color changeColor, Color defaultColor, float duration)
+    public static void AnimateTextChange(TextMeshProUGUI textElement, int startValue, int endValue, Color changeColor, Color defaultColor, float duration, string prefix = "")
     {
-
-        scoreText.DOColor(changeColor, duration / 2).OnComplete(() =>
+        DOTween.Kill(textElement);
+        textElement.DOColor(changeColor, duration / 2).OnComplete(() =>
         {
-            scoreText.DOColor(defaultColor, duration / 2);
+            textElement.DOColor(defaultColor, duration / 2);
         });
-        DOTween.To(() => startScore, x => scoreText.text = "Score: " + x, endScore, duration);
+
+        DOTween.To(() => startValue, x =>
+        {
+            textElement.text = $"{prefix}{x}";
+        }, endValue, duration);
     }
+
 }
