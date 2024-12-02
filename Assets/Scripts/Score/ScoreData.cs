@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ScoreData", menuName = "Game/ScoreData")]
@@ -26,14 +28,14 @@ public class ScoreData : ScriptableObject
     {
         if (gameEvents == null) return;
         gameEvents.OnAsteroidDestroyed += AddScore;
-        gameEvents.OnPlayerDamaged += ResetScoreOnDeath;
+        gameEvents.OnPlayerDamaged += OnPlayerDamaged;
         gameEvents.OnPlayerDeath += OnPlayerDeath;
     }
     private void OnDisable()
     {
         if (gameEvents == null) return;
         gameEvents.OnAsteroidDestroyed -= AddScore;
-        gameEvents.OnPlayerDamaged -= ResetScoreOnDeath;
+        gameEvents.OnPlayerDamaged -= OnPlayerDamaged;
         gameEvents.OnPlayerDeath -= OnPlayerDeath;
         ResetData();
     }
@@ -43,13 +45,11 @@ public class ScoreData : ScriptableObject
         currentScore += points;
         Debug.Log($"Score updated: {currentScore}");
     }
-
-    private void ResetScoreOnDeath()
+    private void OnPlayerDamaged()
     {
-        //Debug.Log("Player damaged. Resetting score.");
-        //currentScore = 0;
+        currentLives--;
+        Debug.Log($"Lives updated: {currentLives}");
     }
-
     public void AddHighScore(int score)
     {
         for (int i = 0; i < highScores.Length; i++)
@@ -67,7 +67,7 @@ public class ScoreData : ScriptableObject
     }
     public void OnPlayerDeath()
     {
-
+        throw new NotImplementedException();
     }
     public void NextLevel()
     {

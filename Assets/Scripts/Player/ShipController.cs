@@ -16,14 +16,28 @@ public class ShipController : MonoBehaviour
     // thrusters
     private bool isThrusterActive;
     private float lastUpdateTime;
+    private bool isAlive = true;
+
+    private void OnEnable()
+    {
+        gameEvents.OnPlayerDeath += ShipDeath;
+    }
+
+    private void OnDisable()
+    {
+        gameEvents.OnPlayerDeath -= ShipDeath;
+    }
+
 
     private void Update()
     {
+        if (!isAlive) return;
         HandleMovement();
         Shoot();
     }
     private void FixedUpdate()
     {
+        if (!isAlive) return;
         HandleThrust();
     }
 
@@ -79,4 +93,14 @@ public class ShipController : MonoBehaviour
             lastUpdateTime = Time.time;
         }
     }
+
+    private void ShipDeath()
+    {
+        isAlive = false;
+        rigidBody.linearVelocity = Vector2.zero;
+        rigidBody.angularVelocity = 0f;
+
+    }
+
+
 }
