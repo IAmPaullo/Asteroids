@@ -6,30 +6,30 @@ public class AsteroidSpawner : MonoBehaviour
     [Header("Asteroid Pool Settings")]
     [SerializeField] private GameObject asteroidPrefab;
     [SerializeField] private int initialPoolSize = 10;
-    [SerializeField] private int spawnAmount = 4;
     [SerializeField] private Vector2 spawnBounds = Vector2.zero;
     [Space]
     [SerializeField] private GameEvents gameEvents;
     private ObjectPool<Asteroid> asteroidPool;
+    private int asteroidsToSpawn;
+
     private void OnEnable()
     {
         gameEvents.OnLevelStart += SpawnAsteroids;
+        gameEvents.OnSetAsteroidsToSpawn += SetAsteroidsToSpawn;
     }
 
     private void OnDisable()
     {
         gameEvents.OnLevelStart -= SpawnAsteroids;
+        gameEvents.OnSetAsteroidsToSpawn -= SetAsteroidsToSpawn;
     }
-    private void Start()
-    {
 
-    }
 
     private void SpawnAsteroids()
     {
         if (asteroidPool == null)
             asteroidPool = new ObjectPool<Asteroid>(asteroidPrefab, initialPoolSize, this.transform);
-        for (int i = 0; i < spawnAmount; i++)
+        for (int i = 0; i < asteroidsToSpawn; i++)
         {
 
             Asteroid asteroid = asteroidPool.GetObject();
@@ -45,7 +45,10 @@ public class AsteroidSpawner : MonoBehaviour
             }
         }
     }
-
+    private void SetAsteroidsToSpawn(int count)
+    {
+        asteroidsToSpawn = count;
+    }
     public void ReturnAsteroidToPool(Asteroid asteroid)
     {
         asteroidPool.ReturnObject(asteroid);

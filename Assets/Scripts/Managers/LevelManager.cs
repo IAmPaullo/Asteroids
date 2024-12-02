@@ -3,6 +3,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     [Header("Game Events")]
+    [SerializeField] private int baseAsteroids = 3;
     [SerializeField] private GameEvents gameEvents;
     [SerializeField] private ScoreData scoreData;
 
@@ -32,6 +33,7 @@ public class LevelManager : MonoBehaviour
         remainingAsteroids = CalculateAsteroidsForLevel();
 
         Debug.Log($"Starting Level with {remainingAsteroids} asteroids.");
+        gameEvents.SetAsteroidsToSpawn(remainingAsteroids);
         gameEvents.LevelStart();
     }
 
@@ -54,7 +56,6 @@ public class LevelManager : MonoBehaviour
 
     private int CalculateAsteroidsForLevel()
     {
-        int baseAsteroids = 4; 
-        return baseAsteroids + (scoreData.currentLevel - 1); 
+        return baseAsteroids + (scoreData.currentLevel - 1);
     }
 }

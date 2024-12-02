@@ -6,6 +6,7 @@ public class GameEvents : ScriptableObject
 {
 
     #region Level Events
+    public event Action<int> OnSetAsteroidsToSpawn;
     public event Action OnLevelStart;
     public event Action OnLevelComplete;
     #endregion
@@ -67,6 +68,10 @@ public class GameEvents : ScriptableObject
     public void AddAsteroids(int count)
     {
         OnAddAsteroids?.Invoke(count);
+    }
+    public void SetAsteroidsToSpawn(int count)
+    {
+        OnSetAsteroidsToSpawn?.Invoke(count);
     }
     #region Sound Methods
 
