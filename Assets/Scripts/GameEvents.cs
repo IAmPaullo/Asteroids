@@ -10,11 +10,16 @@ public class GameEvents : ScriptableObject
     public event Action OnLevelComplete;
     #endregion
 
-    public event Action<int> OnAsteroidDestroyed;
-    public event Action OnWrapAround;
+    #region Player Events
     public event Action OnPlayerDamaged;
+    public event Action<int> OnAsteroidDestroyed;
+    public event Action<int> OnAddAsteroids;
     public event Action OnLevelUp;
     public event Action HUDUpdate;
+    public event Action OnThrusterStart;
+    public event Action OnThrusterStop;
+    #endregion
+    public event Action OnWrapAround;
 
     #region Sound Events
     public event Action OnShootSound;
@@ -22,10 +27,16 @@ public class GameEvents : ScriptableObject
     public event Action OnPlayerDamagedSound;
     #endregion
 
+
+    #region Player Methods
     public void AsteroidDestroyed(int points)
     {
         OnAsteroidDestroyed?.Invoke(points);
         PlayExplosionSound();
+    }
+    public void OnShoot()
+    {
+        OnShootSound?.Invoke();
     }
     public void PlayerDamaged()
     {
@@ -43,12 +54,22 @@ public class GameEvents : ScriptableObject
     {
         OnWrapAround?.Invoke();
     }
-    public void OnShoot()
+    public void ThrusterStart()
     {
-        OnShootSound?.Invoke();
+        OnThrusterStart?.Invoke();
     }
 
-    #region Sound Events
+    public void ThrusterStop()
+    {
+        OnThrusterStop?.Invoke();
+    }
+    #endregion
+    public void AddAsteroids(int count)
+    {
+        OnAddAsteroids?.Invoke(count);
+    }
+    #region Sound Methods
+
     public void PlayExplosionSound()
     {
         OnExplosionSound?.Invoke();
@@ -58,8 +79,7 @@ public class GameEvents : ScriptableObject
         OnPlayerDamagedSound?.Invoke();
     }
     #endregion
-
-    #region Level Manager Events
+    #region Level Manager Methods
     public void LevelStart()
     {
         OnLevelStart?.Invoke();
@@ -69,4 +89,6 @@ public class GameEvents : ScriptableObject
         OnLevelComplete?.Invoke();
     }
     #endregion
+
+
 }

@@ -9,6 +9,7 @@ public class Asteroid : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float speed;
     [SerializeField] private AsteroidSize asteroidSize;
+    [SerializeField] private int childAsteroidAmount = 2;
 
 
     [Header("Sprites")]
@@ -63,6 +64,7 @@ public class Asteroid : MonoBehaviour
 
     public void BreakAsteroid()
     {
+        if (isDestroyed) return;
         isDestroyed = true;
         gameEvents.AsteroidDestroyed(points);
 
@@ -76,7 +78,8 @@ public class Asteroid : MonoBehaviour
 
         if (nextSize != null)
         {
-            SpawnChildAsteroids(nextSize.Value, 2);
+            SpawnChildAsteroids(nextSize.Value, childAsteroidAmount);
+            gameEvents.AddAsteroids(childAsteroidAmount);
         }
         gameObject.SetActive(false);
         spawner.ReturnAsteroidToPool(this);

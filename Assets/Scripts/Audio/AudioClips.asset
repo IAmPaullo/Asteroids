@@ -36,3 +36,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 27f5c73783ea78c43af27fd557766dc1, type: 3}
     - {fileID: 8300000, guid: 4b8793a7e951cfa458f18a262593b1ba, type: 3}
     - {fileID: 8300000, guid: 84564895254dd414f9a31527f844d142, type: 3}
+  thrusterSounds:
+    categoryName: Thrusters
+    clips:
+    - {fileID: 8300000, guid: 2f540b5ccbeaebd4591927d5af85a3a1, type: 3}

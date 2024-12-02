@@ -12,12 +12,14 @@ public class LevelManager : MonoBehaviour
     {
         gameEvents.OnLevelComplete += StartLevel;
         gameEvents.OnAsteroidDestroyed += HandleAsteroidDestroyed;
+        gameEvents.OnAddAsteroids += AddAsteroids;
     }
 
     private void OnDisable()
     {
         gameEvents.OnLevelComplete -= StartLevel;
         gameEvents.OnAsteroidDestroyed -= HandleAsteroidDestroyed;
+        gameEvents.OnAddAsteroids -= AddAsteroids;
     }
 
     private void Start()
@@ -33,7 +35,10 @@ public class LevelManager : MonoBehaviour
         gameEvents.LevelStart();
     }
 
-
+    public void AddAsteroids(int count)
+    {
+        remainingAsteroids += count;
+    }
     private void HandleAsteroidDestroyed(int _)//ISSUE repurpose asteroid destroyed event? >spaghetti<
     {
         remainingAsteroids--;

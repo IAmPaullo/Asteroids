@@ -12,8 +12,10 @@ public class ShipController : MonoBehaviour
     [SerializeField] private Transform bulletSpawnPosition;
     [Header("Game Events")]
     [SerializeField] private GameEvents gameEvents;
-    private bool isThrusting;
-    private float turnDirection;
+
+    // thrusters
+    private bool isThrusterActive;
+    private float lastUpdateTime;
 
     private void Update()
     {
@@ -42,7 +44,9 @@ public class ShipController : MonoBehaviour
     private void HandleThrust()
     {
         float thrust = Input.GetAxis("Vertical") * thrustSpeed * Time.deltaTime;
+        thrust = thrust < 0 ? 0 : thrust;
         rigidBody.linearVelocity = transform.up * thrust;
+        HandleThrusterAudio(thrust);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -50,6 +54,29 @@ public class ShipController : MonoBehaviour
         {
             gameEvents?.PlayerDamaged();
             Debug.Log("Player hit by asteroid");
+        }
+    }
+    private void HandleThrusterAudio(float thruster)
+    {
+        if (Time.time - lastUpdateTime > 0.2f)
+        {
+            if (thruster > 0)
+            {
+                if (!isThrusterActive)
+                {
+                    gameEvents.ThrusterStart();
+                    isThrusterActive = true;
+                }
+            }
+            else
+            {
+                if (isThrusterActive)
+                {
+                    gameEvents.ThrusterStop();
+                    isThrusterActive = false;
+                }
+            }
+            lastUpdateTime = Time.time;
         }
     }
 }

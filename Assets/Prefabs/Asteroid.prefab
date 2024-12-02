@@ -49,11 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 2769544885600454161}
-  currentSize: 0
-  minSize: 0.35
-  maxSize: 1.35
   speed: 1
   asteroidSize: 0
+  childAsteroidAmount: 2
   spriteRenderer: {fileID: 42670165281082557}
   smallAsteroidsSprites:
   - {fileID: -5944249128653297893, guid: 27575289689260346a5fa5a563c2ad50, type: 3}
