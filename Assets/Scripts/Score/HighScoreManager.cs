@@ -1,26 +1,28 @@
-using TMPro;
 using UnityEngine;
+using TMPro;
 
-public class HighScoreManager : MonoBehaviour
+public class HighScoresScreen : MonoBehaviour
 {
-    [Header("Score Data")]
+    [SerializeField] private GameObject highscorePanel;
+    [SerializeField] private Transform highscoreContainer;
+    [SerializeField] private TextMeshProUGUI highScoresTextPrefab;
     [SerializeField] private ScoreData scoreData;
 
-    [Header("UI Elements")]
-    [SerializeField] private TextMeshProUGUI highScoresText;
-
-    private void Start()
+    public void DisplayHighScores()
     {
-        DisplayHighScores();
-    }
-
-    private void DisplayHighScores()
-    {
-        highScoresText.text = "High Scores:\n";
-        int len = scoreData.highScores.Count;
-        for (int i = 0; i < len; i++)
+        highscorePanel.SetActive(true);
+        foreach (Transform child in highscoreContainer)
         {
-            highScoresText.text += $"{i + 1}. {scoreData.highScores[i]}\n";
+            Destroy(child.gameObject);
+        }
+
+        int highscoreLength = scoreData.highScores.Count;
+        for (int i = 0; i < highscoreLength; i++)
+        {
+            var currentText = Instantiate(highScoresTextPrefab, highscoreContainer);
+            currentText.text = $"{i + 1}. {scoreData.highScores[i]}";
+            var entry = scoreData.highScores[i];
+            currentText.text = $"{i + 1}. {new string(entry.name)} - {entry.score}";
         }
     }
 }

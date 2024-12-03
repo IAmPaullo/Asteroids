@@ -6,7 +6,7 @@ using UnityEngine;
 public class ScoreData : ScriptableObject
 {
     [Header("High Scores")]
-    public List<HighScoreEntry> highScores = new();
+    public List<HighScoreEntry> highScores = new(5);
 
 
     [Header("Name")]
@@ -47,7 +47,11 @@ public class ScoreData : ScriptableObject
         currentScore += points;
         Debug.Log($"Score updated: {currentScore}");
     }
-
+    private void AddPlayer(string playerName)
+    {
+        this.playerName = playerName;
+        Debug.Log($"Added player: {playerName}");
+    }
     private void OnPlayerDamaged()
     {
         currentLives--;
@@ -71,18 +75,18 @@ public class ScoreData : ScriptableObject
     public int GetHighestScore()
     {
         if (highScores.Count == 0) return 0;
-        return highScores[0].score; 
+        return highScores[0].score;
     }
 
     public int GetLowestScore()
     {
-        if (highScores.Count == 0) return 0; 
-        return highScores[highScores.Count - 1].score; 
+        if (highScores.Count == 0) return 0;
+        return highScores[highScores.Count - 1].score;
     }
 
     public void SortHighScores()
     {
-        
+
         highScores.Sort((a, b) => b.score.CompareTo(a.score));
     }
 
