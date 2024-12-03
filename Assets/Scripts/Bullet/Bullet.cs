@@ -3,6 +3,9 @@
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
+    [SerializeField] private float lifetime = 5f;
+    private float lifeTimer;
+
 
     private BulletSpawner spawner;
     private Vector2 direction;
@@ -11,21 +14,26 @@ public class Bullet : MonoBehaviour
     {
         this.spawner = spawner;
         this.direction = direction;
-
-
         transform.position = position;
+        lifeTimer = lifetime;
+
     }
 
     private void Update()
     {
 
-        transform.Translate(direction * speed * Time.deltaTime);
+        transform.Translate(speed * Time.deltaTime * direction);
+        lifeTimer -= Time.deltaTime;
+
+        if (lifeTimer <= 0)
+        {
+            ReturnToPool();
+        }
     }
 
     private void OnBecameInvisible()
     {
-
-        spawner.ReturnBulletToPool(this);
+        ReturnToPool();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,9 +42,13 @@ public class Bullet : MonoBehaviour
         if (collision.TryGetComponent<Asteroid>(out Asteroid asteroid))
         {
             asteroid.BreakAsteroid();
-            gameObject.SetActive(false);
-            spawner.ReturnBulletToPool(this);
+            ReturnToPool();
         }
     }
+
+    private void ReturnToPool()
+    {
+        gameObject.SetActive(false);
+        spawner.ReturnBulletToPool(this);
+    }
 }
-//TODO add bullet lifetime
