@@ -89,5 +89,4 @@ public class AnimationHandler : MonoBehaviour
             textElement.text = $"{prefix}{x}";
         }, endValue, duration);
     }
-
 }

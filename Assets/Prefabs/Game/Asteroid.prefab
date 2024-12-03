@@ -52,6 +52,9 @@ MonoBehaviour:
   speed: 1
   asteroidSize: 0
   childAsteroidAmount: 2
+  largeAsteroidPoints: 20
+  mediumAsteroidPoints: 50
+  smallAsteroidPoints: 100
   spriteRenderer: {fileID: 42670165281082557}
   smallAsteroidsSprites:
   - {fileID: -5944249128653297893, guid: 27575289689260346a5fa5a563c2ad50, type: 3}

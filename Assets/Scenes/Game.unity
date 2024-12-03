@@ -541,7 +541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blackHole: {fileID: 483094839}
-  asteroidSpawnInterval: 15
+  asteroidSpawnInterval: 10
   asteroidSpawnAreaWidth: 10
   asteroidSpawnAreaHeight: 10
   scoreData: {fileID: 11400000, guid: 7f3cd8c9caa9bc242b4a400968551653, type: 2}
@@ -651,18 +651,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraShakeIntensity: 0.4
   cameraShakeDuration: 0.4
+  pulseDuration: 0.5
   mainCamera: {fileID: 519420031}
   scoreText: {fileID: 3980061800519697546}
   levelText: {fileID: 3980061800519697544}
-  lifeText: {fileID: 0}
   lowLifePanel: {fileID: 622338761}
-  fadeCanvasGroup: {fileID: 0}
-  fadeDuration: 1
-  targetTransform: {fileID: 0}
-  scalePunch: {x: 0.2, y: 0.2, z: 0}
-  scaleDuration: 0.3
-  pulseDuration: 0.5
-  pulseAmplitude: 0.2
   gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
   scoreData: {fileID: 11400000, guid: 7f3cd8c9caa9bc242b4a400968551653, type: 2}
 --- !u!1 &1140117518
@@ -1093,7 +1086,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2308498836182550494, guid: 635b425b006f2b74ba069b3dbad911dd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2435747241258067311, guid: 635b425b006f2b74ba069b3dbad911dd, type: 3}
       propertyPath: m_AnchorMax.x

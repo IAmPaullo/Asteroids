@@ -11,6 +11,10 @@ public class Asteroid : MonoBehaviour
     [SerializeField] private AsteroidSize asteroidSize;
     [SerializeField] private int childAsteroidAmount = 2;
 
+    [Header("Point Values")]
+    [SerializeField] private int largeAsteroidPoints = 20;
+    [SerializeField] private int mediumAsteroidPoints = 50;
+    [SerializeField] private int smallAsteroidPoints = 100;
 
     [Header("Sprites")]
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -19,7 +23,6 @@ public class Asteroid : MonoBehaviour
     [SerializeField] private Sprite[] largeAsteroidsSprites;
 
     [SerializeField] private GameEvents gameEvents;
-    [SerializeField] private int points;
 
     public enum AsteroidSize { Large, Medium, Small }
     private AsteroidSpawner spawner;
@@ -66,6 +69,8 @@ public class Asteroid : MonoBehaviour
     {
         if (isDestroyed) return;
         isDestroyed = true;
+
+        int points = GetAsteroidPoints();
         gameEvents.AsteroidDestroyed(points);
 
         AsteroidSize? nextSize = asteroidSize switch
@@ -103,6 +108,16 @@ public class Asteroid : MonoBehaviour
                 child.InitializeAsteroid(spawner, size, Random.Range(1f, 3f), spawnPosition);
             }
         }
+    }
+    private int GetAsteroidPoints()
+    {
+        return asteroidSize switch
+        {
+            AsteroidSize.Large => largeAsteroidPoints,
+            AsteroidSize.Medium => mediumAsteroidPoints,
+            AsteroidSize.Small => smallAsteroidPoints,
+            _ => throw new System.Exception($"Invalid Asteroid Size: {asteroidSize}")
+        };
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
