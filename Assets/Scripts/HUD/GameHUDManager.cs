@@ -1,4 +1,4 @@
-using System.Text;
+﻿using System.Text;
 using TMPro;
 using UnityEngine;
 
@@ -44,9 +44,9 @@ public class GameHUDManager : MonoBehaviour
         StringBuilder sb = new();
         for (int i = 0; i < amount; i++)
         {
-            sb.Append()
+            sb.Append("♥");
         }
-        livesText.text = $"Lives: {}";
+        livesText.text = $"Lives: {sb}";
     }
 
     private void DisableHUD()

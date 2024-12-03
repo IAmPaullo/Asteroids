@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private ScoreData scoreData;
     [Header("Game Settings")]
-    [SerializeField] private int playerLives = 3;
+    private int playerLives;
     [SerializeField] private GameEvents gameEvents;
     public int PlayerLives => playerLives;
     public GameEvents GameEvents => gameEvents;
@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         scoreData.ResetData();
+        playerLives = scoreData.startingLivesAmount;
         UpdateHUD();
     }
     public void AddScore(int points)
@@ -39,7 +40,6 @@ public class GameManager : MonoBehaviour
     private void ProcessPlayerDamage()
     {
         playerLives--;
-
         Action processedAction = playerLives <= 0 ? GameOver : UpdateHUD;
 
         processedAction?.Invoke();

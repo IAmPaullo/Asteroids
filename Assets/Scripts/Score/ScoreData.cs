@@ -7,12 +7,12 @@ public class ScoreData : ScriptableObject
 {
 
 
-    [SerializeField] private int startingLivesAmount;
 
     [Header("High Scores")]
     public int[] highScores = new int[10];
 
     [Header("Lives")]
+    public int startingLivesAmount;
     public int currentLives;
 
     [Header("Current Score")]
