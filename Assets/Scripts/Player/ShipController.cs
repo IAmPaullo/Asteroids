@@ -17,6 +17,7 @@ public class ShipController : MonoBehaviour
     private bool isThrusterActive;
     private float lastUpdateTime;
     private bool isAlive = true;
+    private bool isMobilePlatform => Application.isMobilePlatform;
 
     private void OnEnable()
     {
@@ -43,6 +44,20 @@ public class ShipController : MonoBehaviour
         HandleThrust();
     }
 
+    #region Mobile Controls
+    private void HandleMobileInput()
+    {
+        float tilt = Input.acceleration.x;
+        float rotation = -tilt * turnSpeed * Time.deltaTime;
+        transform.Rotate(0, 0, rotation);
+    }
+    private void HandleMobileThrust()
+    {
+        float thrust = Input.acceleration.y * thrustSpeed * Time.deltaTime;
+        thrust = thrust < 0 ? 0 : thrust;
+        rigidBody.linearVelocity = transform.up * thrust * thrustSpeed;
+    }
+    #endregion
     private void Shoot()
     {
         if (Input.GetKeyDown(KeyCode.Space))//trocar pro new input
@@ -52,14 +67,24 @@ public class ShipController : MonoBehaviour
             gameEvents.OnShoot();
         }
     }
+
+    public void ShootMobile()
+    {
+        Vector2 direction = transform.up;
+        bulletSpawner.SpawnBullet(bulletSpawnPosition.position, direction);
+        gameEvents.OnShoot();
+    }
+
     private void HandleMovement()
     {
-        float rotation = -Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime;
+        float inputValue = isMobilePlatform ? Input.acceleration.x : Input.GetAxis("Horizontal");
+        float rotation = -inputValue * turnSpeed * Time.deltaTime;
         transform.Rotate(0, 0, rotation);
     }
     private void HandleThrust()
     {
-        float thrust = Input.GetAxis("Vertical") * thrustSpeed * Time.deltaTime;
+        float inputValue = isMobilePlatform ? Input.acceleration.y : Input.GetAxis("Vertical");
+        float thrust = inputValue * thrustSpeed * Time.deltaTime;
         thrust = thrust < 0 ? 0 : thrust;
         rigidBody.linearVelocity = transform.up * thrust;
         HandleThrusterAudio(thrust);
