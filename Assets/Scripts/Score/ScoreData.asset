@@ -12,9 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd67e332bf69ef4d9c0eaf8e791b75e, type: 3}
   m_Name: ScoreData
   m_EditorClassIdentifier: 
-  highScores: e8030000000000000000000000000000000000000000000000000000000000000000000000000000
+  highScores:
+  - name: 500042004600
+    score: 90010
+  - name: 410044004400
+    score: 90010
+  - name: 500042004600
+    score: 90010
+  - name: 500042004600
+    score: 50010
+  - name: 500042004600
+    score: 50010
+  - name: 410041004100
+    score: 50010
+  - name: 500042004600
+    score: 25500
   startingLivesAmount: 4
-  currentLives: 1
-  currentScore: 0
+  currentLives: -1
+  currentScore: 90010
   currentLevel: 1
   gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}

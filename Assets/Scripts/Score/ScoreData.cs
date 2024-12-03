@@ -8,6 +8,10 @@ public class ScoreData : ScriptableObject
     [Header("High Scores")]
     public List<HighScoreEntry> highScores = new();
 
+
+    [Header("Name")]
+    public string playerName;
+
     [Header("Lives")]
     public int startingLivesAmount;
     public int currentLives;
