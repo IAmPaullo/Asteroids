@@ -11,11 +11,19 @@ public class InitialsScreenManager : MonoBehaviour
 
     private void Start()
     {
-        initialsScreenCanvas.SetActive(true);
-        mainMenuCanvas.SetActive(false);
+        if (scoreData.playerName != string.Empty)
+        {
+            initialsScreenCanvas.SetActive(false);
+            mainMenuCanvas.SetActive(true);
+        }
+        else
+        {
+            initialsScreenCanvas.SetActive(true);
+            mainMenuCanvas.SetActive(false);
+        }
     }
 
-    public void ConfirmInitials()
+    public void SubmitInitials()
     {
         string initials = initialsInputField.text.ToUpper();
 

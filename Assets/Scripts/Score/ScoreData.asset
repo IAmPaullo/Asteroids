@@ -12,28 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd67e332bf69ef4d9c0eaf8e791b75e, type: 3}
   m_Name: ScoreData
   m_EditorClassIdentifier: 
-  highScores:
-  - name: 500042004600
-    score: 90010
-  - name: 410044004400
-    score: 90010
-  - name: 500042004600
-    score: 90010
-  - name: 500042004600
-    score: 50010
-  - name: 500042004600
-    score: 50010
-  - name: 410041004100
-    score: 50010
-  - name: 500042004600
-    score: 25500
-  - name: 410041004100
-    score: 0
-  - name: 310032003300
-    score: 0
-  - name: 560056004700
-    score: 0
-  playerName: ASD
+  highScores: []
+  playerName: 
   startingLivesAmount: 2
   currentLives: 2
   currentScore: 0

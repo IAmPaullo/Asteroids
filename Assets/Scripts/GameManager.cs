@@ -62,11 +62,18 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         Debug.Log("Game Over :( ");
-        char[] name = { 'P', 'B', 'F' };
-        scoreData.AddHighScore(scoreData.currentScore, name);
+        if (CheckForHighScore())
+        {
+            char[] placeHolder = { 'P', 'B', 'F' };
+            char[] name = scoreData.playerName == string.Empty ? placeHolder : scoreData.playerName.ToCharArray();
+            scoreData.AddHighScore(scoreData.currentScore, name);
+        }
         gameEvents.GameOver();
     }
-
+    private bool CheckForHighScore()
+    {
+        return scoreData.currentScore > scoreData.GetHighestScore();
+    }
     private IEnumerator SpawnBlackHolePeriodically()
     {
         while (true)
@@ -77,13 +84,11 @@ public class GameManager : MonoBehaviour
     }
     private void SpawnBlackHole()
     {
-        Vector3 randomSpawnPosition = new Vector3(
+        Vector3 randomSpawnPosition = new(
             UnityEngine.Random.Range(-asteroidSpawnAreaWidth / 2f, asteroidSpawnAreaWidth / 2f),
             UnityEngine.Random.Range(-asteroidSpawnAreaHeight / 2f, asteroidSpawnAreaHeight / 2f),
             0f
         );
         blackHole.Initialize(randomSpawnPosition);
     }
-
-
 }

@@ -12,7 +12,7 @@ public class GameOverManager : MonoBehaviour
     [SerializeField] private ScoreData scoreData;
     [SerializeField] private GameEvents gameEvents;
 
-    private bool isHighScore = false;
+
 
     private void OnEnable()
     {
@@ -28,18 +28,6 @@ public class GameOverManager : MonoBehaviour
         if (gameOverCanvas == null) return;
         gameOverCanvas.SetActive(true);
     }
-
-    private void Start()
-    {
-        isHighScore = CheckForHighScore();
-        if (isHighScore)
-            scoreData.AddHighScore(scoreData.currentScore, scoreData.playerName.ToCharArray());
-    }
-    private bool CheckForHighScore()
-    {
-        return scoreData.currentScore > scoreData.GetHighestScore();
-    }
-
     public void RestartGame()
     {
         scoreData.ResetData();
