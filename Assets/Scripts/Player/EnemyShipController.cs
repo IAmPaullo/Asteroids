@@ -17,8 +17,6 @@ public class EnemyShipController : MonoBehaviour
     private bool isEnabled;
     private Transform player;
 
-
-
     public void Initialize(Transform player)
     {
         shipType = GetShipType();
@@ -28,7 +26,7 @@ public class EnemyShipController : MonoBehaviour
 
     private void Update()
     {
-        if (player == null) return;
+        if (player == null || !isEnabled) return;
 
         MoveTowardsPlayer();
         ShootHandler();
@@ -46,7 +44,6 @@ public class EnemyShipController : MonoBehaviour
             ShootAtPlayer();
         }
     }
-
     private void MoveTowardsPlayer()
     {
         if (shipType == ShipType.Advanced)
@@ -71,7 +68,6 @@ public class EnemyShipController : MonoBehaviour
         gameEvents.OnShoot();
 
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Bullet"))
@@ -79,7 +75,6 @@ public class EnemyShipController : MonoBehaviour
             DestroyShip();
         }
     }
-
     public void DestroyShip()
     {
         gameEvents.AsteroidDestroyed(points);

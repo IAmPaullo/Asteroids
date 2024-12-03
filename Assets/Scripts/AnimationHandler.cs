@@ -1,9 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
-using System.Text;
 
 public class AnimationHandler : MonoBehaviour
 {
