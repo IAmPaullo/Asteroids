@@ -48,8 +48,7 @@ public class GameManager : MonoBehaviour
         UpdateHUD();
         StartCoroutine(SpawnBlackHolePeriodically());
         player = GameObject.FindWithTag("Player")?.transform;
-
-
+        Time.timeScale = 1f;
     }
     public void AddScore(int points)
     {

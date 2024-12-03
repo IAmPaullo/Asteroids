@@ -105,7 +105,7 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("All AudioSources are busy!");
             return;
         }
-
+        audioSource.volume = playerConfig.gameAudioVolume;
         audioSource.pitch = randomPitch ? Random.Range(0f, 1.5f) : 1f;
         audioSource.PlayOneShot(clip);
         StartCoroutine(ReturnAudioSourceToPool(audioSource, clip.length));
