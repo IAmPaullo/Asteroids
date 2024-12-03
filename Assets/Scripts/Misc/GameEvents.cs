@@ -29,6 +29,7 @@ public class GameEvents : ScriptableObject
     public event Action OnExplosionSound;
     public event Action OnPlayerDamagedSound;
     #endregion
+    public event Action OnGameOver;
 
 
     #region Player Methods
@@ -102,9 +103,14 @@ public class GameEvents : ScriptableObject
         OnLevelComplete?.Invoke();
     }
     #endregion
+
     public void GameReset()
     {
         OnGameReset?.Invoke();
+    }
+    public void GameOver()
+    {
+        OnGameOver?.Invoke();
     }
 
 }

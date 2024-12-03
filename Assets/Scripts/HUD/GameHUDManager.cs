@@ -1,3 +1,4 @@
+using System.Text;
 using TMPro;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class GameHUDManager : MonoBehaviour
     [SerializeField] private GameEvents gameEvents;
 
     [Header("UI Elements")]
+    [SerializeField] private GameObject gameHUD;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI livesText;
     [SerializeField] private TextMeshProUGUI levelText;
@@ -17,6 +19,7 @@ public class GameHUDManager : MonoBehaviour
     private void OnEnable()
     {
         gameEvents.OnLevelStart += UpdateHUD;
+        gameEvents.OnGameOver += DisableHUD;
         gameEvents.HUDUpdate += UpdateHUD;
         UpdateHUD();
     }
@@ -24,14 +27,31 @@ public class GameHUDManager : MonoBehaviour
     private void OnDisable()
     {
         gameEvents.OnLevelStart -= UpdateHUD;
+        gameEvents.OnGameOver -= DisableHUD;
         gameEvents.HUDUpdate -= UpdateHUD;
     }
 
     private void UpdateHUD()
     {
         scoreText.text = $"Score: {scoreData.currentScore}";
-        livesText.text = $"Lives: {scoreData.currentLives}";
+        UpdateLives();
         levelText.text = $"Level: {scoreData.currentLevel}";
+    }
+
+    private void UpdateLives()
+    {
+        int amount = scoreData.currentLives;
+        StringBuilder sb = new();
+        for (int i = 0; i < amount; i++)
+        {
+            sb.Append()
+        }
+        livesText.text = $"Lives: {}";
+    }
+
+    private void DisableHUD()
+    {
+        gameHUD.SetActive(false);
     }
 
 }
