@@ -2,31 +2,23 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
+using System.Text;
 
 public class AnimationHandler : MonoBehaviour
 {
     [Header("Animation Settings")]
     [SerializeField] private float cameraShakeIntensity = .4f;
     [SerializeField] private float cameraShakeDuration = .4f;
+    [SerializeField] private float pulseDuration = 0.5f;
+
 
     [Header("References")]
     [SerializeField] private Camera mainCamera;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI levelText;
-    [SerializeField] private TextMeshProUGUI lifeText;
+    [SerializeField] private Image lowLifePanel;
 
-    [Header("Fade Settings")]
-    [SerializeField] private CanvasGroup fadeCanvasGroup;
-    [SerializeField] private float fadeDuration = 1f;
-
-    [Header("Scale Settings")]
-    [SerializeField] private Transform targetTransform;
-    [SerializeField] private Vector3 scalePunch = new Vector3(0.2f, 0.2f, 0f);
-    [SerializeField] private float scaleDuration = 0.3f;
-
-    [Header("Pulse Settings")]
-    [SerializeField] private float pulseDuration = 0.5f;
-    [SerializeField] private float pulseAmplitude = 0.2f;
 
     [Header("Game Events")]
     [SerializeField] private GameEvents gameEvents;
@@ -49,8 +41,10 @@ public class AnimationHandler : MonoBehaviour
     private void HandlePlayerDamage()
     {
         ShakeCamera();
-        AnimateTextChange(lifeText, scoreData.currentLives + 1, scoreData.currentLives,
-            Color.red, Color.white, 0.75f, "Lives: ");
+        if (scoreData.currentLives < 2 )
+        {
+            PulsateLifeLowPanel();
+        }
     }
 
     private void HandleLevelComplete()
@@ -74,35 +68,14 @@ public class AnimationHandler : MonoBehaviour
         }
     }
 
-    private void FadeScreen(Color fadeColor)
+    private void PulsateLifeLowPanel()
     {
-        if (fadeCanvasGroup != null)
+        if (lowLifePanel != null)
         {
-            fadeCanvasGroup.gameObject.SetActive(true);
-            fadeCanvasGroup.DOFade(1, fadeDuration).OnComplete(() =>
-            {
-                fadeCanvasGroup.DOFade(0, fadeDuration).OnComplete(() =>
-                {
-                    fadeCanvasGroup.gameObject.SetActive(false);
-                });
-            });
+            lowLifePanel.DOFade(0.75f, pulseDuration).SetLoops(-1, LoopType.Yoyo);
         }
     }
 
-    private void PunchScale(Transform target)
-    {
-        if (target != null)
-        {
-            target.DOPunchScale(scalePunch, scaleDuration, 10, 0.5f);
-        }
-    }
-
-    public void PulseValue(float startValue, float targetValue, System.Action<float> onUpdate)
-    {
-        DOTween.To(() => startValue, x => onUpdate(x), targetValue, pulseDuration)
-            .SetLoops(2, LoopType.Yoyo)
-            .SetEase(Ease.InOutSine);
-    }
     public static void AnimateTextChange(TextMeshProUGUI textElement, int startValue, int endValue, Color changeColor, Color defaultColor, float duration, string prefix = "")
     {
         DOTween.Kill(textElement);

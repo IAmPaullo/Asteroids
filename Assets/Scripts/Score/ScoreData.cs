@@ -49,6 +49,7 @@ public class ScoreData : ScriptableObject
     }
     private void OnPlayerDamaged()
     {
+        if (currentLives <= 0) return;
         currentLives--;
         Debug.LogWarning($"Lives updated: {currentLives}");
         if (currentLives <= 0)

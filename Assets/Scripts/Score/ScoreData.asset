@@ -27,8 +27,15 @@ MonoBehaviour:
     score: 50010
   - name: 500042004600
     score: 25500
-  startingLivesAmount: 4
-  currentLives: -1
-  currentScore: 90010
+  - name: 410041004100
+    score: 0
+  - name: 310032003300
+    score: 0
+  - name: 560056004700
+    score: 0
+  playerName: ASD
+  startingLivesAmount: 2
+  currentLives: 2
+  currentScore: 0
   currentLevel: 1
   gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}

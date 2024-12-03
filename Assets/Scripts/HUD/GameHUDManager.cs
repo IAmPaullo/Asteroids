@@ -13,7 +13,7 @@ public class GameHUDManager : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] private GameObject gameHUD;
     [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI livesText;
+    //[SerializeField] private TextMeshProUGUI livesText;
     [SerializeField] private TextMeshProUGUI levelText;
 
     private void OnEnable()
@@ -34,19 +34,18 @@ public class GameHUDManager : MonoBehaviour
     private void UpdateHUD()
     {
         scoreText.text = $"Score: {scoreData.currentScore}";
-        UpdateLives();
         levelText.text = $"Level: {scoreData.currentLevel}";
     }
 
     private void UpdateLives()
     {
-        int amount = scoreData.currentLives;
-        StringBuilder sb = new();
-        for (int i = 0; i < amount; i++)
-        {
-            sb.Append("♥");
-        }
-        livesText.text = $"Lives: {sb}";
+        //int amount = scoreData.currentLives;
+        //StringBuilder sb = new();
+        //for (int i = 0; i < amount; i++)
+        //{
+        //    sb.Append("♥");
+        //}
+        ////livesText.text = $"Lives: {sb}";
     }
 
     private void DisableHUD()

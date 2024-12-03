@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private ScoreData scoreData;
     [Header("Game Settings")]
     [Header("Black Hole Settings")]
     [SerializeField] private BlackHole blackHole;
 
     [Header("Spawn Settings")]
-    [SerializeField] private float spawnAreaWidth = 10f;
-    [SerializeField] private float spawnAreaHeight = 10f;
-    [SerializeField] private float spawnInterval = 15f;
+    [SerializeField, Range(0f, 15f)] private float asteroidSpawnInterval = 15f;
+    [SerializeField] private float asteroidSpawnAreaWidth = 10f;
+    [SerializeField] private float asteroidSpawnAreaHeight = 10f;
 
+    [SerializeField] private ScoreData scoreData;
     [SerializeField] private GameEvents gameEvents;
     private int playerLives;
     public int PlayerLives => playerLives;
@@ -72,14 +72,14 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             SpawnBlackHole();
-            yield return new WaitForSeconds(spawnInterval);
+            yield return new WaitForSeconds(asteroidSpawnInterval);
         }
     }
     private void SpawnBlackHole()
     {
         Vector3 randomSpawnPosition = new Vector3(
-            UnityEngine.Random.Range(-spawnAreaWidth / 2f, spawnAreaWidth / 2f),
-            UnityEngine.Random.Range(-spawnAreaHeight / 2f, spawnAreaHeight / 2f),
+            UnityEngine.Random.Range(-asteroidSpawnAreaWidth / 2f, asteroidSpawnAreaWidth / 2f),
+            UnityEngine.Random.Range(-asteroidSpawnAreaHeight / 2f, asteroidSpawnAreaHeight / 2f),
             0f
         );
         blackHole.Initialize(randomSpawnPosition);
