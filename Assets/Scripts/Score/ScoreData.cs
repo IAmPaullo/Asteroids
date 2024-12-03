@@ -47,11 +47,6 @@ public class ScoreData : ScriptableObject
         currentScore += points;
         Debug.Log($"Score updated: {currentScore}");
     }
-    private void AddPlayer(string playerName)
-    {
-        this.playerName = playerName;
-        Debug.Log($"Added player: {playerName}");
-    }
     private void OnPlayerDamaged()
     {
         currentLives--;
@@ -61,6 +56,11 @@ public class ScoreData : ScriptableObject
             Debug.LogWarning("Player is dead!");
             gameEvents.PlayerDeath();
         }
+    }
+    public void AddPlayer(string playerName)
+    {
+        this.playerName = playerName;
+        Debug.Log($"Added player: {playerName}");
     }
 
     public void AddHighScore(int score, char[] name)

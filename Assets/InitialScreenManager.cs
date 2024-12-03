@@ -11,8 +11,8 @@ public class InitialsScreenManager : MonoBehaviour
 
     private void Start()
     {
-        initialsScreenCanvas.SetActive(true); 
-        mainMenuCanvas.SetActive(false);      
+        initialsScreenCanvas.SetActive(true);
+        mainMenuCanvas.SetActive(false);
     }
 
     public void ConfirmInitials()
@@ -25,7 +25,7 @@ public class InitialsScreenManager : MonoBehaviour
             return;
         }
 
-        scoreData.AddHighScore(scoreData.currentScore, initials.ToCharArray()); 
+        scoreData.AddPlayer(initials);
 
         initialsScreenCanvas.SetActive(false);
         mainMenuCanvas.SetActive(true);

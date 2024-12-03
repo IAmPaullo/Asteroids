@@ -12,11 +12,12 @@ public class BlackHole : MonoBehaviour
     private Vector3 targetDirection;
     private bool isGrowing = true;
     private Vector3 originalScale = Vector3.zero;
+    private Coroutine movementCoroutine;
+
     public void Initialize(Vector3 startPosition)
     {
-        GetComponent<PointEffector2D>().enabled = true;
-        transform.position = startPosition;
-        Vector3 randomDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
+        ResetBlackHole(startPosition);
+        Vector3 randomDirection = new(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
         targetDirection = randomDirection.normalized;
         StartGrowth();
     }
@@ -29,15 +30,33 @@ public class BlackHole : MonoBehaviour
             StartMovement();
         });
     }
+    private void ResetBlackHole(Vector3 startPosition)
+    {
+        transform.localScale = originalScale;
+
+        transform.position = startPosition;
+
+        GetComponent<PointEffector2D>().enabled = true;
+
+        DOTween.Kill(transform);
+        if (movementCoroutine != null)
+        {
+            StopCoroutine(movementCoroutine);
+            movementCoroutine = null;
+        }
+        isGrowing = true;
+    }
+
     private void StartMovement()
     {
-        StartCoroutine(MoveBlackHole());
+        movementCoroutine = StartCoroutine(MoveBlackHole());
     }
+
     private IEnumerator MoveBlackHole()
     {
         while (!isGrowing)
         {
-            transform.Translate(targetDirection * moveSpeed * Time.deltaTime);
+            transform.Translate(moveSpeed * Time.deltaTime * targetDirection);
             yield return null;
         }
     }
