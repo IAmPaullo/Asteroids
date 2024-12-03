@@ -21,6 +21,7 @@ public class EnemyShipController : MonoBehaviour
 
     public void Initialize(Transform player)
     {
+        shipType = GetShipType();
         this.player = player;
         isEnabled = true;
     }
@@ -32,19 +33,17 @@ public class EnemyShipController : MonoBehaviour
         MoveTowardsPlayer();
         ShootHandler();
     }
-
+    private ShipType GetShipType()
+    {
+        float rnd = Random.value;
+        ShipType type = rnd >= 0.55f ? ShipType.Advanced : ShipType.Simple;
+        return type;
+    }
     private void ShootHandler()
     {
         if (Time.time >= nextShootTime)
         {
-            if (shipType == ShipType.Advanced && Vector2.Distance(transform.position, player.position) <= detectionRange)
-            {
-                ShootAtPlayer();
-            }
-            else if (shipType == ShipType.Simple)
-            {
-                ShootAtPlayer();
-            }
+            ShootAtPlayer();
         }
     }
 
@@ -63,7 +62,10 @@ public class EnemyShipController : MonoBehaviour
 
     private void ShootAtPlayer()
     {
-        var direction = (player.position - transform.position);
+        Vector2 direction = shipType == ShipType.Advanced ?
+            direction = (player.position - transform.position) :
+            new(Random.Range(-1f, -1f), Random.Range(-1f, -1f));
+
         bulletSpawner.SpawnBullet(bulletSpawnPoint.position, direction, true);
         nextShootTime = Time.time + shootingRate;
         gameEvents.OnShoot();
