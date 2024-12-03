@@ -52,7 +52,8 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         Debug.Log("Game Over :( ");
-        scoreData.AddHighScore(scoreData.currentScore);
+        char[] name = { 'P', 'B', 'F' };
+        scoreData.AddHighScore(scoreData.currentScore, name);
         gameEvents.GameOver();
     }
 }

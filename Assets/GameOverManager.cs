@@ -49,52 +49,44 @@ public class GameOverManager : MonoBehaviour
 
     private void DisplayHighScores()
     {
+        foreach (Transform child in highscoreContainer)
+        {
+            if (child.GetComponent<TextMeshProUGUI>() != highScoresText) ///TODO remover o highscore do parent?? Desnecessario?
+            {
+                Destroy(child.gameObject);
+            }
+        }
         highScoresText.text = "High Scores";
 
-        int highscoreLength = scoreData.highScores.Length;
+        int highscoreLength = scoreData.highScores.Count;
         for (int i = 0; i < highscoreLength; i++)
         {
             var currentText = Instantiate(highscoreTextPrefab, highscoreContainer);
-            currentText.text = $"{i + 1}. {scoreData.highScores[i]}";
+            var entry = scoreData.highScores[i];
+            currentText.text = $"{i + 1}. {new string(entry.name)} - {entry.score}";
         }
     }
 
     private bool CheckForHighScore()
     {
-        return scoreData.currentScore > scoreData.highScores[^1];
+        return scoreData.currentScore > scoreData.GetHighestScore();
     }
 
     public void SubmitHighScore()
     {
         string initials = initialsInputField.text;
-
-        if (string.IsNullOrEmpty(initials))
+        if (string.IsNullOrEmpty(initials) || initials.Length > 3)
         {
-            Debug.LogWarning("Initials cannot be empty!");
+            Debug.LogWarning("Initials must be 1 to 3 characters long!");
             return;
         }
-        UpdateHighScores(initials, scoreData.currentScore);
+        char[] initialsArray = initials.ToUpper().ToCharArray();
+        scoreData.AddHighScore(scoreData.currentScore, initialsArray);
         initialsInputContainer.SetActive(false);
         DisplayHighScores();
     }
 
-    private void UpdateHighScores(string initials, int score)
-    {
-        for (int i = 0; i < scoreData.highScores.Length; i++)
-        {
-            if (score > scoreData.highScores[i])
-            {
-                for (int j = scoreData.highScores.Length - 1; j > i; j--)
-                {
-                    scoreData.highScores[j] = scoreData.highScores[j - 1];
-                }
-                scoreData.highScores[i] = score;
-                Debug.Log($"New HighScore: {initials} - {score}");
-                break;
-            }
-        }
-    }
-
+    
     public void RestartGame()
     {
         scoreData.ResetData();

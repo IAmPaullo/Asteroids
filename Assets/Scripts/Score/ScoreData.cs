@@ -1,15 +1,12 @@
 using System;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ScoreData", menuName = "Game/ScoreData")]
 public class ScoreData : ScriptableObject
 {
-
-
-
     [Header("High Scores")]
-    public int[] highScores = new int[10];
+    public List<HighScoreEntry> highScores = new();
 
     [Header("Lives")]
     public int startingLivesAmount;
@@ -31,6 +28,7 @@ public class ScoreData : ScriptableObject
         gameEvents.OnPlayerDamaged += OnPlayerDamaged;
         gameEvents.OnPlayerDeath += OnPlayerDeath;
     }
+
     private void OnDisable()
     {
         if (gameEvents == null) return;
@@ -45,6 +43,7 @@ public class ScoreData : ScriptableObject
         currentScore += points;
         Debug.Log($"Score updated: {currentScore}");
     }
+
     private void OnPlayerDamaged()
     {
         currentLives--;
@@ -55,30 +54,45 @@ public class ScoreData : ScriptableObject
             gameEvents.PlayerDeath();
         }
     }
-    public void AddHighScore(int score)
+
+    public void AddHighScore(int score, char[] name)
     {
-        for (int i = 0; i < highScores.Length; i++)
-        {
-            if (score > highScores[i])
-            {
-                for (int j = highScores.Length - 1; j > i; j--)
-                {
-                    highScores[j] = highScores[j - 1];
-                }
-                highScores[i] = score;
-                break;
-            }
-        }
+        HighScoreEntry newEntry = new HighScoreEntry { name = name, score = score };
+        highScores.Add(newEntry);
+
+
+        SortHighScores();
     }
+
+    public int GetHighestScore()
+    {
+        if (highScores.Count == 0) return 0;
+        return highScores[0].score; 
+    }
+
+    public int GetLowestScore()
+    {
+        if (highScores.Count == 0) return 0; 
+        return highScores[highScores.Count - 1].score; 
+    }
+
+    public void SortHighScores()
+    {
+        
+        highScores.Sort((a, b) => b.score.CompareTo(a.score));
+    }
+
     public void OnPlayerDeath()
     {
-        //throw new NotImplementedException();
+        //
     }
+
     public void NextLevel()
     {
         currentLevel++;
         gameEvents.HUDUpdated();
     }
+
     public void ResetData()
     {
         currentScore = 0;
