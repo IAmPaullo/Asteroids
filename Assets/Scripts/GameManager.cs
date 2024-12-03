@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     [Header("Game Settings")]
     [Header("Black Hole Settings")]
+    private Transform player;
     [SerializeField] private BlackHole blackHole;
 
     [Header("Spawn Settings")]
@@ -13,22 +14,32 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float asteroidSpawnAreaWidth = 10f;
     [SerializeField] private float asteroidSpawnAreaHeight = 10f;
 
+    [Header("Enemy Ship Settings")]
+    [SerializeField] private GameObject enemyShipPrefab;
+    [SerializeField] private float spawnCooldown = 2f;
+    private float nextSpawnTime;
+
     [SerializeField] private ScoreData scoreData;
     [SerializeField] private GameEvents gameEvents;
     private int playerLives;
     public int PlayerLives => playerLives;
     public GameEvents GameEvents => gameEvents;
 
+
     private void OnEnable()
     {
         gameEvents.OnPlayerDamaged += ProcessPlayerDamage;
         gameEvents.OnAsteroidDestroyed += AddScore;
+        gameEvents.OnLevelComplete += HandleLevelComplete;
+
     }
 
     private void OnDisable()
     {
         gameEvents.OnPlayerDamaged -= ProcessPlayerDamage;
         gameEvents.OnAsteroidDestroyed -= AddScore;
+        gameEvents.OnLevelComplete -= HandleLevelComplete;
+
     }
     private void Start()
     {
@@ -36,6 +47,9 @@ public class GameManager : MonoBehaviour
         playerLives = scoreData.startingLivesAmount;
         UpdateHUD();
         StartCoroutine(SpawnBlackHolePeriodically());
+        player = GameObject.FindWithTag("Player")?.transform;
+
+
     }
     public void AddScore(int points)
     {
@@ -54,7 +68,23 @@ public class GameManager : MonoBehaviour
 
         processedAction?.Invoke();
     }
-
+    private void HandleLevelComplete()
+    {
+        if (scoreData.currentLevel % 2 == 0)
+        {
+            SpawnEnemyShip();
+        }
+    }
+    private void SpawnEnemyShip()
+    {
+        if (Time.time >= nextSpawnTime)
+        {
+            Vector3 spawnPosition = new(UnityEngine.Random.Range(-8f, 8f), UnityEngine.Random.Range(-4f, 4f), 0f);
+            var enemy = Instantiate(enemyShipPrefab, spawnPosition, Quaternion.identity);
+            enemy.GetComponent<EnemyShipController>().Initialize(player.transform);
+            nextSpawnTime = Time.time + spawnCooldown;
+        }
+    }
     private void UpdateHUD()
     {
         gameEvents?.HUDUpdated();

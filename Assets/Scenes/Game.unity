@@ -544,6 +544,8 @@ MonoBehaviour:
   asteroidSpawnInterval: 10
   asteroidSpawnAreaWidth: 10
   asteroidSpawnAreaHeight: 10
+  enemyShipPrefab: {fileID: 838360519967959548, guid: ae22594f15d5f4d4880c4ecf8226eabe, type: 3}
+  spawnCooldown: 2
   scoreData: {fileID: 11400000, guid: 7f3cd8c9caa9bc242b4a400968551653, type: 2}
   gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
 --- !u!4 &563279275

@@ -9,14 +9,15 @@ public class Bullet : MonoBehaviour
 
     private BulletSpawner spawner;
     private Vector2 direction;
+    private bool isEnemyBullet;
 
-    public void InitializeBullet(BulletSpawner spawner, Vector3 position, Vector2 direction)
+    public void InitializeBullet(BulletSpawner spawner, Vector3 position, Vector2 direction, bool isEnemyBullet = false)
     {
         this.spawner = spawner;
         this.direction = direction;
         transform.position = position;
         lifeTimer = lifetime;
-
+        this.isEnemyBullet = isEnemyBullet;
     }
 
     private void Update()
@@ -38,11 +39,28 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-        if (collision.TryGetComponent<Asteroid>(out Asteroid asteroid))
+        if (!isEnemyBullet)
         {
-            asteroid.BreakAsteroid();
-            ReturnToPool();
+            if (collision.TryGetComponent<Asteroid>(out Asteroid asteroid))
+            {
+                asteroid.BreakAsteroid();
+                ReturnToPool();
+            }
+            else if (collision.TryGetComponent(out EnemyShipController enemy))
+            {
+                enemy.DestroyShip();
+            }
+        }
+        else
+        {
+            if (collision.TryGetComponent<Asteroid>(out Asteroid asteroid))
+            {
+                asteroid.BreakAsteroid(false);
+                ReturnToPool();
+            }else if(collision.TryGetComponent(out ShipController player))
+            {
+                player.Damage();
+            }
         }
     }
 

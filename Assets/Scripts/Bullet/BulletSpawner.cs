@@ -13,13 +13,13 @@ public class BulletSpawner : MonoBehaviour
         bulletPool = new ObjectPool<Bullet>(bulletPrefab, initialPoolSize, bulletPoolParent);
     }
 
-    public void SpawnBullet(Vector3 position, Vector2 direction)
+    public void SpawnBullet(Vector3 position, Vector2 direction, bool isEnemyBullet = false)
     {
         Bullet bullet = bulletPool.GetObject();
 
         if (bullet != null)
         {
-            bullet.InitializeBullet(this, position, direction);
+            bullet.InitializeBullet(this, position, direction, isEnemyBullet);
             bullet.gameObject.SetActive(true);
         }
     }

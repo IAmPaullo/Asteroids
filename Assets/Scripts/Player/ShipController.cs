@@ -78,6 +78,7 @@ public class ShipController : MonoBehaviour
     private void HandleMovement()
     {
         float inputValue = isMobilePlatform ? Input.acceleration.x : Input.GetAxis("Horizontal");
+        Debug.Log(inputValue);
         float rotation = -inputValue * turnSpeed * Time.deltaTime;
         transform.Rotate(0, 0, rotation);
     }
@@ -93,10 +94,15 @@ public class ShipController : MonoBehaviour
     {
         if (collision.collider.CompareTag("Asteroid"))
         {
-            gameEvents?.PlayerDamaged();
-            Debug.Log("Player hit by asteroid");
+            Damage();
         }
     }
+    public void Damage()
+    {
+        gameEvents?.PlayerDamaged();
+        Debug.Log("Player hit by asteroid");
+    }
+
     private void HandleThrusterAudio(float thruster)
     {
         if (Time.time - lastUpdateTime > 0.2f)
@@ -134,3 +140,6 @@ public class ShipController : MonoBehaviour
 
 
 }
+
+
+

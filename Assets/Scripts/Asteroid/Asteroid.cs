@@ -65,12 +65,12 @@ public class Asteroid : MonoBehaviour
         rigidBody.linearVelocity = direction * speed;
     }
 
-    public void BreakAsteroid()
+    public void BreakAsteroid(bool addPoints = true)
     {
         if (isDestroyed) return;
         isDestroyed = true;
 
-        int points = GetAsteroidPoints();
+        int points = addPoints ? GetAsteroidPoints() : 0;
         gameEvents.AsteroidDestroyed(points);
 
         AsteroidSize? nextSize = asteroidSize switch
