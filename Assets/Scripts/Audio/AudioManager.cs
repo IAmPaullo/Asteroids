@@ -17,6 +17,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("Game Events")]
     [SerializeField] private GameEvents gameEvents;
+    [SerializeField] private PlayerConfig playerConfig;
 
 
     private readonly float shootCooldown = 0.1f;
@@ -51,6 +52,7 @@ public class AudioManager : MonoBehaviour
     }
     private void PlayThrusterSound()
     {
+        if (!playerConfig.isSoundActivated) return;
         if (!thrusterAudioSource.isPlaying)
         {
             thrusterAudioSource.clip = audioClipsConfig.GetThrusterSound();
@@ -87,7 +89,7 @@ public class AudioManager : MonoBehaviour
 
     private void PlaySound(AudioClip clip, bool randomPitch = false, bool isHighPriority = false)
     {
-        if (clip == null) return;
+        if (clip == null || !playerConfig.isSoundActivated) return;
 
         AudioSource audioSource;
         if (audioSourcePool.Count > 0)
@@ -123,5 +125,10 @@ public class AudioManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         audioSourcePool.Enqueue(audioSource);
+    }
+
+    private void SwitchAudioVolume()
+    {
+        float volume = playerConfig.isSoundActivated ? 1f : 0f;
     }
 }

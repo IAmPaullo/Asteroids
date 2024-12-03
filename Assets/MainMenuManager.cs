@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
 
     [Header("Game Settings")]
     [SerializeField] private ScoreData scoreData;
-    private bool isSoundOn = true; 
+    [SerializeField] private PlayerConfig playerConfig;
 
     public void StartGame()
     {
@@ -34,10 +34,8 @@ public class MainMenu : MonoBehaviour
 
     public void ToggleSound()
     {
-        isSoundOn = !isSoundOn;
-        soundButtonText.text = isSoundOn ? "Sound: ON" : "Sound: OFF";
-
-        AudioListener.volume = isSoundOn ? 1f : 0f;
+        playerConfig.SwitchAudio();
+        soundButtonText.text = playerConfig.isSoundActivated ? "Sound: ON" : "Sound: OFF";
     }
 
     public void ReturnToMainMenu()
