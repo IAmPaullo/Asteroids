@@ -13,6 +13,7 @@ public class AnimationHandler : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private Color[] backgroundColors;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI miscText;
@@ -40,7 +41,7 @@ public class AnimationHandler : MonoBehaviour
     private void HandlePlayerDamage()
     {
         ShakeCamera();
-        if (scoreData.currentLives < 2 )
+        if (scoreData.currentLives < 2)
         {
             PulsateLifeLowPanel();
         }
@@ -50,8 +51,9 @@ public class AnimationHandler : MonoBehaviour
     {
         AnimateTextChange(levelText, scoreData.currentLevel - 1, scoreData.currentLevel,
             Color.green, Color.white, 0.75f, "Level: ");
+        AnimateBackgroundColorChange(mainCamera.backgroundColor, backgroundColors[Random.Range(0, backgroundColors.Length)], .33f);
     }
-    
+
 
     private void HandleAsteroidDestroyed(int points)
     {
@@ -74,6 +76,17 @@ public class AnimationHandler : MonoBehaviour
         {
             lowLifePanel.DOFade(0.75f, pulseDuration).SetLoops(-1, LoopType.Yoyo);
         }
+    }
+
+    private void AnimateBackgroundColorChange(Color fromColor, Color toColor, float duration)
+    {
+        mainCamera.backgroundColor = fromColor;
+
+        DOTween.To(() => mainCamera.backgroundColor,
+                   x => mainCamera.backgroundColor = x,
+                   toColor,
+                   duration)
+               .SetEase(Ease.InOutSine);
     }
 
     public static void AnimateTextChange(TextMeshProUGUI textElement, int startValue, int endValue, Color changeColor, Color defaultColor, float duration, string prefix = "")

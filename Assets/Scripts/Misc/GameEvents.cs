@@ -20,6 +20,7 @@ public class GameEvents : ScriptableObject
     public event Action OnPlayerDamaged;
     public event Action OnPlayerDeath;
     public event Action<int> OnAsteroidDestroyed;
+    public event Action<int> OnEnemyShipDestroyed;
     public event Action<int> OnAddAsteroids;
     public event Action OnLevelUp;
     public event Action HUDUpdate;
@@ -39,6 +40,12 @@ public class GameEvents : ScriptableObject
     {
         if (points <= 0) return;
         OnAsteroidDestroyed?.Invoke(points);
+        PlayExplosionSound();
+    }
+    public void EnemyShipDestroyed(int points)
+    {
+        if (points <= 0) return;
+        OnEnemyShipDestroyed?.Invoke(points);
         PlayExplosionSound();
     }
     public void OnShoot()

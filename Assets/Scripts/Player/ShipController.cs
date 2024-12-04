@@ -103,7 +103,6 @@ public class ShipController : MonoBehaviour
     private void HandleThrust()
     {
         thrustInputValue = IsMobilePlatform ? 0.85f : Input.GetAxis("Vertical");
-        Debug.LogError(IsMobilePlatform);
         float thrust = thrustInputValue * thrustSpeed * Time.deltaTime;
         thrust = thrust < 0 ? 0 : thrust;
         rigidBody.linearVelocity = transform.up * thrust;

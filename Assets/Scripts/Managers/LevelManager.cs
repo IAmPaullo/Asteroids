@@ -45,7 +45,6 @@ public class LevelManager : MonoBehaviour
     private void HandleAsteroidDestroyed(int _)//ISSUE repurpose asteroid destroyed event? >spaghetti<
     {
         remainingAsteroids--;
-
         Debug.Log($"Asteroid destroyed! Remaining: {remainingAsteroids}");
 
         if (remainingAsteroids <= 0)
@@ -54,7 +53,6 @@ public class LevelManager : MonoBehaviour
             gameEvents.LevelComplete();
         }
     }
-
     private int CalculateAsteroidsForLevel()
     {
         return baseAsteroids + (scoreData.currentLevel - 1);

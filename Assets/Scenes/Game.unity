@@ -487,7 +487,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.4745098, g: 0.25019065, b: 0.19215688, a: 0}
+  m_BackGroundColor: {r: 0.2234247, g: 0.19215688, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -715,6 +715,12 @@ MonoBehaviour:
   cameraShakeDuration: 0.4
   pulseDuration: 0.5
   mainCamera: {fileID: 519420031}
+  backgroundColors:
+  - {r: 0.16470589, g: 0.05882353, b: 0.34901962, a: 1}
+  - {r: 0.12941177, g: 0.654902, b: 0.92156863, a: 1}
+  - {r: 0.12941177, g: 0.15686275, b: 0.92156863, a: 1}
+  - {r: 0.12941177, g: 0.40392157, b: 0.92156863, a: 1}
+  - {r: 0.12941177, g: 0.90588236, b: 0.92156863, a: 1}
   scoreText: {fileID: 3980061800519697546}
   levelText: {fileID: 3980061800519697544}
   miscText: {fileID: 766502852}

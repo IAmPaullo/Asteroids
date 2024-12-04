@@ -70,7 +70,7 @@ public class Asteroid : MonoBehaviour
         if (isDestroyed) return;
         isDestroyed = true;
 
-        int points = addPoints ? GetAsteroidPoints() : 0;
+        int points = addPoints ? GetAsteroidPoints() : 5;
         gameEvents.AsteroidDestroyed(points);
 
         AsteroidSize? nextSize = asteroidSize switch

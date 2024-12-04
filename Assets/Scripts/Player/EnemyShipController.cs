@@ -80,7 +80,7 @@ public class EnemyShipController : MonoBehaviour
 
     public void DestroyShip()
     {
-        gameEvents.AsteroidDestroyed(points);
+        gameEvents.EnemyShipDestroyed(points);
         Destroy(gameObject); //TODO implement alien pool??
     }
 }
