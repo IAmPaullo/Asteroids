@@ -8,6 +8,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject mainMenuCanvas;
     [SerializeField] private GameObject highScoresCanvas;
     [SerializeField] private GameObject controlsCanvas;
+    [SerializeField] private GameObject mobileControlsScreen;
+    [SerializeField] private GameObject defaultControlsScreen;
 
     [Header("Buttons")]
     [SerializeField] private Button playButton;
@@ -44,6 +46,9 @@ public class MainMenu : MonoBehaviour
 
     public void ShowControls()
     {
+        bool isMobile = UnityEngine.Device.Application.isMobilePlatform;
+        mobileControlsScreen.SetActive(isMobile);
+        defaultControlsScreen.SetActive(!mobileControlsScreen.activeSelf);
         controlsCanvas.SetActive(true);
     }
 
