@@ -47,6 +47,11 @@ public class GameHUDManager : MonoBehaviour
             thrustButton.SetActive(true);
             shootButton.SetActive(true);
         }
+        else
+        {
+            thrustButton.SetActive(false);
+            shootButton.SetActive(false);
+        }
     }
 
     private void UpdateMiscText()

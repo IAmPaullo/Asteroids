@@ -1047,9 +1047,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 290069570721883495, guid: 28696356c09cb7743b258bcd7c4cb77f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 783668921560373558, guid: 28696356c09cb7743b258bcd7c4cb77f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 45.999985
+      value: 46
       objectReference: {fileID: 0}
     - target: {fileID: 1950747101478050790, guid: 28696356c09cb7743b258bcd7c4cb77f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1087,6 +1091,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 5042059216157317871, guid: 28696356c09cb7743b258bcd7c4cb77f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6283453163347803214, guid: 28696356c09cb7743b258bcd7c4cb77f, type: 3}
       propertyPath: m_Delegates.Array.size
       value: 2
