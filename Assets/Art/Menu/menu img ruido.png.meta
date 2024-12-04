@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      menu img ruido_0: -7775807550792641664
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

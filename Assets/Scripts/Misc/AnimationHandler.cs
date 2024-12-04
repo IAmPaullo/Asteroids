@@ -8,7 +8,7 @@ public class AnimationHandler : MonoBehaviour
     [Header("Animation Settings")]
     [SerializeField] private float cameraShakeIntensity = .4f;
     [SerializeField] private float cameraShakeDuration = .4f;
-    [SerializeField] private float pulseDuration = 0.5f;
+    [SerializeField] private float pulseDuration = 0.33f;
 
 
     [Header("References")]
@@ -74,7 +74,7 @@ public class AnimationHandler : MonoBehaviour
     {
         if (lowLifePanel != null)
         {
-            lowLifePanel.DOFade(0.75f, pulseDuration).SetLoops(-1, LoopType.Yoyo);
+            lowLifePanel.DOFade(0.33f, pulseDuration).SetLoops(-1, LoopType.Yoyo);
         }
     }
 

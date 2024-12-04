@@ -23,7 +23,7 @@ MonoBehaviour:
     score: 35000
   playerName: 
   startingLivesAmount: 10
-  currentLives: 0
+  currentLives: 10
   currentScore: 0
   currentLevel: 1
   gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}

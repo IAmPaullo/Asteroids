@@ -703,7 +703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraShakeIntensity: 0.4
   cameraShakeDuration: 0.4
-  pulseDuration: 0.5
+  pulseDuration: 0.75
   mainCamera: {fileID: 519420031}
   backgroundColors:
   - {r: 0.21960784, g: 0.07058824, b: 0.3529412, a: 1}
