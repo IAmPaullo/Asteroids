@@ -966,7 +966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2940f8d73b50c3418c53c792fede7b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseAsteroids: 1
+  baseAsteroids: 4
   gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
   scoreData: {fileID: 11400000, guid: 7f3cd8c9caa9bc242b4a400968551653, type: 2}
 --- !u!1 &1666318683
