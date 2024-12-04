@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: aa375c984bdb3aa4dabbb1c53dc20c80
+guid: 67dc22ea7a4a3e246828898ecc02f1a9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 671593692159411527
-    second: playerShip2_damage2_0
+      213: 8609250509788152357
+    second: main menu render_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: playerShip2_damage2_0
+      name: main menu render_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 112
-        height: 76
+        width: 257
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7450e8e97eaf15900800000000000000
-      internalID: 671593692159411527
+      spriteID: 522064299b33a7770800000000000000
+      internalID: 8609250509788152357
       vertices: []
       indices: 
       edges: []
@@ -160,8 +160,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      playerShip2_damage2_0: 671593692159411527
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

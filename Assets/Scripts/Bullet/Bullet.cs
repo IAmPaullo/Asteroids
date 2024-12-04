@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class Bullet : MonoBehaviour
     private BulletSpawner spawner;
     private Vector2 direction;
     private bool isEnemyBullet;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
+
 
     public void InitializeBullet(BulletSpawner spawner, Vector3 position, Vector2 direction, bool isEnemyBullet = false)
     {
@@ -18,11 +22,12 @@ public class Bullet : MonoBehaviour
         transform.position = position;
         lifeTimer = lifetime;
         this.isEnemyBullet = isEnemyBullet;
+        spriteRenderer?.transform.DORotate(new Vector3(0, 0, 360), lifeTimer, RotateMode.FastBeyond360)
+            .SetLoops(-1, LoopType.Incremental);
     }
 
     private void Update()
     {
-
         transform.Translate(speed * Time.deltaTime * direction);
         lifeTimer -= Time.deltaTime;
 
@@ -57,7 +62,8 @@ public class Bullet : MonoBehaviour
             {
                 asteroid.BreakAsteroid(false);
                 ReturnToPool();
-            }else if(collision.TryGetComponent(out ShipController player))
+            }
+            else if (collision.TryGetComponent(out ShipController player))
             {
                 player.Damage();
             }

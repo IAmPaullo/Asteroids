@@ -22,6 +22,10 @@ public class Asteroid : MonoBehaviour
     [SerializeField] private Sprite[] mediumAsteroidsSprites;
     [SerializeField] private Sprite[] largeAsteroidsSprites;
 
+    [Header("Particle Settings")]
+    [SerializeField] private ParticleSystem hitParticleSystem;
+    [SerializeField] private bool playOnCollision = true;
+
     [SerializeField] private GameEvents gameEvents;
 
     public enum AsteroidSize { Large, Medium, Small }
@@ -71,6 +75,7 @@ public class Asteroid : MonoBehaviour
         isDestroyed = true;
         int points = addPoints ? GetAsteroidPoints() : 5;
         gameEvents.AsteroidDestroyed(points);
+        TriggerHitEffect();
 
         AsteroidSize? nextSize = asteroidSize switch
         {
@@ -89,7 +94,14 @@ public class Asteroid : MonoBehaviour
         spawner.ReturnAsteroidToPool(this);
 
     }
-
+    private void TriggerHitEffect()
+    {
+        if (hitParticleSystem != null && playOnCollision)
+        {
+            hitParticleSystem.transform.position = transform.position;
+            hitParticleSystem.Play(); 
+        }
+    }
     private void SpawnChildAsteroids(AsteroidSize size, int quantity)
     {
         for (int i = 0; i < quantity; i++)

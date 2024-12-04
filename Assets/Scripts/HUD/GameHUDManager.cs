@@ -14,6 +14,7 @@ public class GameHUDManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private GameObject thrustButton;
     [SerializeField] private GameObject shootButton;
+    [SerializeField] private GameObject pauseButton;
 
 
     [Header("Score Data")]
@@ -46,11 +47,13 @@ public class GameHUDManager : MonoBehaviour
         {
             thrustButton.SetActive(true);
             shootButton.SetActive(true);
+            pauseButton.SetActive(true);
         }
         else
         {
             thrustButton.SetActive(false);
             shootButton.SetActive(false);
+            pauseButton.SetActive(false);
         }
     }
 

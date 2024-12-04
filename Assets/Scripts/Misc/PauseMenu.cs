@@ -9,7 +9,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject pauseMenuCanvas; 
     [SerializeField] private Button resumeButton; 
     [SerializeField] private Button mainMenuButton; 
-    [SerializeField] private Button audioButton;
+    [SerializeField] private Button pauseButton;
+    [SerializeField] private Button closePauseButton;
     [SerializeField] private Slider volumeSlider;
 
     [SerializeField] private PlayerConfig playerConfig;
@@ -20,15 +21,15 @@ public class PauseMenu : MonoBehaviour
     {
         resumeButton.onClick.AddListener(ResumeGame);
         mainMenuButton.onClick.AddListener(GoToMainMenu);
-        audioButton.onClick.AddListener(GoToMainMenu);
+        pauseButton.onClick.AddListener(PauseGame);
+        closePauseButton.onClick.AddListener(ResumeGame);
         ChangeAudioVolumeSlider();
         pauseMenuCanvas.SetActive(false);
     }
 
     private void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Escape)) // new input
+        if (Input.GetKeyDown(KeyCode.Escape)) // TODO switch to new input
         {
             if (isPaused)
                 ResumeGame();
@@ -42,7 +43,6 @@ public class PauseMenu : MonoBehaviour
         isPaused = true;
         Time.timeScale = .15f;
         pauseMenuCanvas.SetActive(true); 
-
     }
 
     private void ResumeGame()
