@@ -15,6 +15,7 @@ public class AnimationHandler : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI levelText;
+    [SerializeField] private TextMeshProUGUI miscText;
     [SerializeField] private Image lowLifePanel;
 
 
@@ -50,6 +51,7 @@ public class AnimationHandler : MonoBehaviour
         AnimateTextChange(levelText, scoreData.currentLevel - 1, scoreData.currentLevel,
             Color.green, Color.white, 0.75f, "Level: ");
     }
+    
 
     private void HandleAsteroidDestroyed(int points)
     {
@@ -85,6 +87,20 @@ public class AnimationHandler : MonoBehaviour
         DOTween.To(() => startValue, x =>
         {
             textElement.text = $"{prefix}{x}";
+        }, endValue, duration);
+    }
+    public static void AnimateTextChange(TextMeshProUGUI textElement, string startValue, string endValue, Color changeColor, Color defaultColor, float duration)
+    {
+        DOTween.Kill(textElement);
+
+        textElement.DOColor(changeColor, duration / 2).OnComplete(() =>
+        {
+            textElement.DOColor(defaultColor, duration / 2);
+        });
+
+        DOTween.To(() => startValue, x =>
+        {
+            textElement.text = x;
         }, endValue, duration);
     }
 }

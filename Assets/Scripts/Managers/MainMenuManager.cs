@@ -39,13 +39,12 @@ public class MainMenu : MonoBehaviour
     public void ShowHighScores()
     {
         highScoresCanvas.SetActive(true);
-        //mainMenuCanvas.SetActive(false);
+
     }
 
     public void ShowControls()
     {
         controlsCanvas.SetActive(true);
-        //mainMenuCanvas.SetActive(false);
     }
 
     public void ToggleSound()

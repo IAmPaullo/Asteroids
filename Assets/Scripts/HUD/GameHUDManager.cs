@@ -10,15 +10,19 @@ public class GameHUDManager : MonoBehaviour
     [Header("Game Events")]
     [SerializeField] private GameEvents gameEvents;
 
+    [SerializeField] private RandomWordList wordList;
+
     [Header("UI Elements")]
     [SerializeField] private GameObject gameHUD;
     [SerializeField] private TextMeshProUGUI scoreText;
-    //[SerializeField] private TextMeshProUGUI livesText;
+    [SerializeField] private TextMeshProUGUI miscText;
     [SerializeField] private TextMeshProUGUI levelText;
+
 
     private void OnEnable()
     {
         gameEvents.OnLevelStart += UpdateHUD;
+        gameEvents.OnLevelComplete += UpdateMiscText;
         gameEvents.OnGameOver += DisableHUD;
         gameEvents.HUDUpdate += UpdateHUD;
         UpdateHUD();
@@ -27,6 +31,7 @@ public class GameHUDManager : MonoBehaviour
     private void OnDisable()
     {
         gameEvents.OnLevelStart -= UpdateHUD;
+        gameEvents.OnLevelComplete -= UpdateMiscText;
         gameEvents.OnGameOver -= DisableHUD;
         gameEvents.HUDUpdate -= UpdateHUD;
     }
@@ -37,15 +42,11 @@ public class GameHUDManager : MonoBehaviour
         levelText.text = $"Level: {scoreData.currentLevel}";
     }
 
-    private void UpdateLives()
+    private void UpdateMiscText()
     {
-        //int amount = scoreData.currentLives;
-        //StringBuilder sb = new();
-        //for (int i = 0; i < amount; i++)
-        //{
-        //    sb.Append("♥");
-        //}
-        ////livesText.text = $"Lives: {sb}";
+        var newText = wordList.GenerateRandomSentence();
+        var currentText = miscText.text;
+        AnimationHandler.AnimateTextChange(miscText, currentText, newText, Color.green, Color.white, 0.55f);
     }
 
     private void DisableHUD()

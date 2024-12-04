@@ -187,8 +187,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreData: {fileID: 11400000, guid: 7f3cd8c9caa9bc242b4a400968551653, type: 2}
   gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
+  wordList: {fileID: 11400000, guid: e8a423ccb64fbb24993d4ae498ae273d, type: 2}
   gameHUD: {fileID: 3980061800519697543}
   scoreText: {fileID: 3980061800519697546}
+  miscText: {fileID: 766502852}
   levelText: {fileID: 3980061800519697544}
 --- !u!1 &240433374
 GameObject:
@@ -609,6 +611,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &766502852 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1347458944919320679, guid: 28696356c09cb7743b258bcd7c4cb77f, type: 3}
+  m_PrefabInstance: {fileID: 3980061800519697542}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &935697814 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7254641357560041735, guid: 28696356c09cb7743b258bcd7c4cb77f, type: 3}
@@ -697,6 +710,7 @@ MonoBehaviour:
   mainCamera: {fileID: 519420031}
   scoreText: {fileID: 3980061800519697546}
   levelText: {fileID: 3980061800519697544}
+  miscText: {fileID: 766502852}
   lowLifePanel: {fileID: 622338761}
   gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
   scoreData: {fileID: 11400000, guid: 7f3cd8c9caa9bc242b4a400968551653, type: 2}
@@ -779,7 +793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrusterAudioSource: {fileID: 1219805289}
-  poolSize: 3
+  poolSize: 8
   audioClipsConfig: {fileID: 11400000, guid: e52e1cc9f11d4ad48a068a0f3d9f51ae, type: 2}
   gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
   playerConfig: {fileID: 11400000, guid: f8ba1a74bf48ecd4ba7930ac63c10550, type: 2}
@@ -939,7 +953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2940f8d73b50c3418c53c792fede7b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseAsteroids: 3
+  baseAsteroids: 1
   gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
   scoreData: {fileID: 11400000, guid: 7f3cd8c9caa9bc242b4a400968551653, type: 2}
 --- !u!4 &1686665770 stripped
@@ -1021,6 +1035,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1347458944919320679, guid: 28696356c09cb7743b258bcd7c4cb77f, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1347458944919320679, guid: 28696356c09cb7743b258bcd7c4cb77f, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 2145799448187161169, guid: 28696356c09cb7743b258bcd7c4cb77f, type: 3}
       propertyPath: m_Name
       value: Game HUD Canvas
