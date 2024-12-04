@@ -1,7 +1,4 @@
-using NUnit.Framework;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "RandomWordList", menuName = "Scriptable Objects/RandomWordList")]
@@ -9,7 +6,6 @@ public class RandomWordList : ScriptableObject
 {
     public List<string> words = new();
     public List<int> numbers = new(); //TODO switch to json?
-
     public List<char> signs = new();
 
     public List<string> abrev = new();

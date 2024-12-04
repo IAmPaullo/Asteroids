@@ -1,5 +1,4 @@
-﻿using System.Text;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class GameHUDManager : MonoBehaviour
@@ -39,22 +38,23 @@ public class GameHUDManager : MonoBehaviour
         gameEvents.HUDUpdate -= UpdateHUD;
     }
 
+    private void Start()
+    {
+        EnableMobileHUD();
+    }
     private void UpdateHUD()
     {
         scoreText.text = $"Score: {scoreData.currentScore}";
         levelText.text = $"Level: {scoreData.currentLevel}";
-        if (UnityEngine.Device.Application.isMobilePlatform & !shootButton.activeSelf)
-        {
-            thrustButton.SetActive(true);
-            shootButton.SetActive(true);
-            pauseButton.SetActive(true);
-        }
-        else
-        {
-            thrustButton.SetActive(false);
-            shootButton.SetActive(false);
-            pauseButton.SetActive(false);
-        }
+    }
+
+    private void EnableMobileHUD()
+    {
+        bool isMobile = UnityEngine.Device.Application.isMobilePlatform;
+        thrustButton.SetActive(isMobile);
+        shootButton.SetActive(isMobile);
+        pauseButton.SetActive(isMobile);
+
     }
 
     private void UpdateMiscText()

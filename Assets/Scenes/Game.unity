@@ -969,6 +969,37 @@ MonoBehaviour:
   baseAsteroids: 1
   gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
   scoreData: {fileID: 11400000, guid: 7f3cd8c9caa9bc242b4a400968551653, type: 2}
+--- !u!1 &1666318683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1666318684}
+  m_Layer: 0
+  m_Name: "CANVAS \u2193"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1666318684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666318683}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1686665770 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6247228945107848213, guid: a7b44e7ee8aee7c43b4c290782f8789a, type: 3}
@@ -1685,8 +1716,9 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 5653136074561997798}
-  - {fileID: 3980061800519697542}
   - {fileID: 456084033}
   - {fileID: 240433375}
   - {fileID: 977006372}
+  - {fileID: 1666318684}
+  - {fileID: 3980061800519697542}
   - {fileID: 5117156967404538040}

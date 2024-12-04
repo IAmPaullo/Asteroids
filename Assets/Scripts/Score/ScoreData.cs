@@ -87,7 +87,6 @@ public class ScoreData : ScriptableObject
 
     public void SortHighScores()
     {
-
         highScores.Sort((a, b) => b.score.CompareTo(a.score));
     }
 

@@ -42,7 +42,7 @@ public class LevelManager : MonoBehaviour
     {
         remainingAsteroids += count;
     }
-    private void HandleAsteroidDestroyed(int _)//ISSUE repurpose asteroid destroyed event? >spaghetti<
+    private void HandleAsteroidDestroyed(int _) //ISSUE repurpose asteroid destroyed event? >spaghetti<
     {
         remainingAsteroids--;
         Debug.Log($"Asteroid destroyed! Remaining: {remainingAsteroids}");

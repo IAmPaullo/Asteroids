@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Audio;
 
 [CreateAssetMenu(fileName = "PlayerConfig", menuName = "Game/PlayerConfig")]
 public class PlayerConfig : ScriptableObject

@@ -63,12 +63,4 @@ public class WrapAround : MonoBehaviour
         }
         return coord;
     }
-
-
-#if UNITY_EDITOR
-    private void OnDrawGizmos()
-    {
-
-    }
-#endif
 }
