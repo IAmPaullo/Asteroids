@@ -1,13 +1,20 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class HighScoresScreen : MonoBehaviour
 {
+    [SerializeField] private Button highScoreButton;
     [SerializeField] private GameObject highscorePanel;
     [SerializeField] private Transform highscoreContainer;
     [SerializeField] private TextMeshProUGUI highScoresTextPrefab;
     [SerializeField] private ScoreData scoreData;
 
+
+    private void Start()
+    {
+        highScoreButton.onClick.AddListener(DisplayHighScores);
+    }
     public void DisplayHighScores()
     {
         highscorePanel.SetActive(true);
@@ -15,7 +22,6 @@ public class HighScoresScreen : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-
         int highscoreLength = scoreData.highScores.Count;
         for (int i = 0; i < highscoreLength; i++)
         {

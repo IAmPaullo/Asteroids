@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class GameHUDManager : MonoBehaviour
 {
-    [Header("Score Data")]
-    [SerializeField] private ScoreData scoreData;
-
-    [Header("Game Events")]
-    [SerializeField] private GameEvents gameEvents;
 
     [SerializeField] private RandomWordList wordList;
 
@@ -17,7 +12,14 @@ public class GameHUDManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI miscText;
     [SerializeField] private TextMeshProUGUI levelText;
+    [SerializeField] private GameObject thrustButton;
+    [SerializeField] private GameObject shootButton;
 
+
+    [Header("Score Data")]
+    [SerializeField] private ScoreData scoreData;
+    [Header("Game Events")]
+    [SerializeField] private GameEvents gameEvents;
 
     private void OnEnable()
     {
@@ -40,6 +42,11 @@ public class GameHUDManager : MonoBehaviour
     {
         scoreText.text = $"Score: {scoreData.currentScore}";
         levelText.text = $"Level: {scoreData.currentLevel}";
+        if (UnityEngine.Device.Application.isMobilePlatform & !shootButton.activeSelf)
+        {
+            thrustButton.SetActive(true);
+            shootButton.SetActive(true);
+        }
     }
 
     private void UpdateMiscText()

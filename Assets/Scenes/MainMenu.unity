@@ -927,6 +927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 649a679084337ca4f8ecff8befa9eadb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highScoreButton: {fileID: 923910350}
   highscorePanel: {fileID: 1698714627}
   highscoreContainer: {fileID: 1363810514}
   highScoresTextPrefab: {fileID: 811238181280852483, guid: ce79b5b91857acb489ce752c81592073, type: 3}
@@ -1534,7 +1535,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1195693096
 MonoBehaviour:
   m_ObjectHideFlags: 0

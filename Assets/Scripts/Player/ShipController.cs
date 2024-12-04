@@ -17,10 +17,19 @@ public class ShipController : MonoBehaviour
     [SerializeField] private GameEvents gameEvents;
 
     // thrusters
+    private float thrustInputValue;
     private bool isThrusterActive;
     private float lastUpdateTime;
     private bool isAlive = true;
-    private bool isMobilePlatform => Application.isMobilePlatform;
+    public bool isThrusting;
+
+    private bool IsMobilePlatform
+    {
+        get
+        {
+            return UnityEngine.Device.Application.isMobilePlatform;
+        }
+    }
 
     private void OnEnable()
     {
@@ -44,21 +53,28 @@ public class ShipController : MonoBehaviour
     private void FixedUpdate()
     {
         if (!isAlive) return;
-        HandleThrust();
+
+        if (IsMobilePlatform)
+        {
+            if (isThrusting)
+                HandleThrust();
+            else
+                thrustInputValue = 0f;
+        }
+        else
+            HandleThrust();
+
     }
 
     #region Mobile Controls
-    private void HandleMobileInput()
+
+    public void OnThrustButtonPressed()
     {
-        float tilt = Input.acceleration.x;
-        float rotation = -tilt * turnSpeed * Time.deltaTime;
-        transform.Rotate(0, 0, rotation);
+        isThrusting = true;
     }
-    private void HandleMobileThrust()
+    public void OnThrustButtonReleased()
     {
-        float thrust = Input.acceleration.y * thrustSpeed * Time.deltaTime;
-        thrust = thrust < 0 ? 0 : thrust;
-        rigidBody.linearVelocity = transform.up * thrust * thrustSpeed;
+        isThrusting = false;
     }
     #endregion
     private void Shoot()
@@ -80,15 +96,15 @@ public class ShipController : MonoBehaviour
 
     private void HandleMovement()
     {
-        float inputValue = isMobilePlatform ? Input.acceleration.x : Input.GetAxis("Horizontal");
-        //Debug.Log(inputValue);
+        float inputValue = IsMobilePlatform ? Input.acceleration.x : Input.GetAxis("Horizontal");
         float rotation = -inputValue * turnSpeed * Time.deltaTime;
         transform.Rotate(0, 0, rotation);
     }
     private void HandleThrust()
     {
-        float inputValue = isMobilePlatform ? Input.acceleration.y : Input.GetAxis("Vertical");
-        float thrust = inputValue * thrustSpeed * Time.deltaTime;
+        thrustInputValue = IsMobilePlatform ? 0.85f : Input.GetAxis("Vertical");
+        Debug.LogError(IsMobilePlatform);
+        float thrust = thrustInputValue * thrustSpeed * Time.deltaTime;
         thrust = thrust < 0 ? 0 : thrust;
         rigidBody.linearVelocity = transform.up * thrust;
         HandleThrusterAudio(thrust);
@@ -150,8 +166,6 @@ public class ShipController : MonoBehaviour
     {
         isAlive = true;
     }
-
-
 }
 
 

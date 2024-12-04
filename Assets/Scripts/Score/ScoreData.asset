@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highScores:
   - name: 500042004600
-    score: 3660
-  - name: 500042004600
-    score: 3220
-  - name: 500042004600
-    score: 780
-  - name: 500042004600
-    score: 40
-  playerName: AAA
+    score: 45000
+  - name: 4b004c003900
+    score: 48000
+  - name: 430043004d00
+    score: 47000
+  - name: 450042005000
+    score: 35000
+  playerName: 
   startingLivesAmount: 10
   currentLives: 0
-  currentScore: 2720
+  currentScore: 0
   currentLevel: 1
   gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
