@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
         gameEvents.OnPlayerDamaged += ProcessPlayerDamage;
         gameEvents.OnAsteroidDestroyed += AddScore;
         gameEvents.OnLevelComplete += HandleLevelComplete;
-
     }
 
     private void OnDisable()
@@ -80,6 +79,7 @@ public class GameManager : MonoBehaviour
         {
             Vector3 spawnPosition = new(UnityEngine.Random.Range(-8f, 8f), UnityEngine.Random.Range(-4f, 4f), 0f);
             var enemy = Instantiate(enemyShipPrefab, spawnPosition, Quaternion.identity);
+            gameEvents.SpawnEnemyShip();
             enemy.GetComponent<EnemyShipController>().Initialize(player.transform);
             nextSpawnTime = Time.time + spawnCooldown;
         }
@@ -118,6 +118,7 @@ public class GameManager : MonoBehaviour
             UnityEngine.Random.Range(-asteroidSpawnAreaHeight / 2f, asteroidSpawnAreaHeight / 2f),
             0f
         );
+        gameEvents.SpawnBlackHole();
         blackHole.Initialize(randomSpawnPosition);
     }
 }

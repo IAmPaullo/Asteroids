@@ -80,11 +80,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65a29f876950e004ba7aa4dc78cd2e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colliderEnableDelay: 1
   points: 250
   shipType: 0
   speed: 2
   shootingRate: 5
-  detectionRange: 10
   bulletSpawner: {fileID: 865992259679720854}
   bulletSpawnPoint: {fileID: 2319751138636420519}
   gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
@@ -126,7 +126,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838360519967959548}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}

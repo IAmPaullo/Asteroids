@@ -40,6 +40,9 @@ public class AudioManager : MonoBehaviour
         gameEvents.OnPlayerDamagedSound += PlayPlayerDamagedSound;
         gameEvents.OnThrusterStart += PlayThrusterSound;
         gameEvents.OnThrusterStop += StopThrusterSound;
+        gameEvents.OnPlayerDeath += PlayPlayerDeathSound;
+        gameEvents.OnSpawnBlackHole += PlayBlackHoleSound;
+        gameEvents.OnSpawnEnemyShip += PlaySpawnEnemyShipSound;
     }
 
     private void OnDisable()
@@ -49,7 +52,14 @@ public class AudioManager : MonoBehaviour
         gameEvents.OnPlayerDamagedSound -= PlayPlayerDamagedSound;
         gameEvents.OnThrusterStart -= PlayThrusterSound;
         gameEvents.OnThrusterStop -= StopThrusterSound;
+        gameEvents.OnPlayerDeath -= PlayPlayerDeathSound;
+        gameEvents.OnSpawnBlackHole -= PlayBlackHoleSound;
+        gameEvents.OnSpawnEnemyShip -= PlaySpawnEnemyShipSound;
+
     }
+
+
+
     private void PlayThrusterSound()
     {
         if (!playerConfig.isSoundActivated) return;
@@ -87,7 +97,18 @@ public class AudioManager : MonoBehaviour
     {
         PlaySound(audioClipsConfig.GetRandomDamageSound());
     }
-
+    private void PlayPlayerDeathSound()
+    {
+        PlaySound(audioClipsConfig.GetRandomDeathSound());
+    }
+    private void PlayBlackHoleSound()
+    {
+        PlaySound(audioClipsConfig.GetRandomBlackHoleSound());
+    }
+    private void PlaySpawnEnemyShipSound()
+    {
+        PlaySound(audioClipsConfig.GetRandomEnemyShipSound());
+    }
     private void PlaySound(AudioClip clip, bool randomPitch = false, bool isHighPriority = false)
     {
         if (clip == null || !playerConfig.isSoundActivated) return;

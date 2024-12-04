@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7345638825917064793}
   - component: {fileID: 2563134539911796016}
   - component: {fileID: 5797298973268666506}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player Ship
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5075608141201879242}
   - component: {fileID: 3322895820245102185}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +272,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3921507250034080531}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bullet Spawn Position
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}

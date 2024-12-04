@@ -5,11 +5,15 @@ using UnityEngine;
 public class GameEvents : ScriptableObject
 {
 
-    public event Action OnGameReset;
     #region Level Events
+    public event Action OnGameReset;
+    public event Action OnGameOver;
     public event Action<int> OnSetAsteroidsToSpawn;
+    public event Action OnWrapAround;
     public event Action OnLevelStart;
     public event Action OnLevelComplete;
+    public event Action OnSpawnBlackHole;
+    public event Action OnSpawnEnemyShip;
     #endregion
 
     #region Player Events
@@ -22,14 +26,12 @@ public class GameEvents : ScriptableObject
     public event Action OnThrusterStart;
     public event Action OnThrusterStop;
     #endregion
-    public event Action OnWrapAround;
 
     #region Sound Events
     public event Action OnShootSound;
     public event Action OnExplosionSound;
     public event Action OnPlayerDamagedSound;
     #endregion
-    public event Action OnGameOver;
 
 
     #region Player Methods
@@ -102,6 +104,10 @@ public class GameEvents : ScriptableObject
     {
         OnLevelComplete?.Invoke();
     }
+    public void SpawnBlackHole()
+    {
+        OnSpawnBlackHole?.Invoke();
+    }
     #endregion
 
     public void GameReset()
@@ -113,4 +119,8 @@ public class GameEvents : ScriptableObject
         OnGameOver?.Invoke();
     }
 
+    public void SpawnEnemyShip()
+    {
+        OnSpawnEnemyShip?.Invoke();
+    }
 }

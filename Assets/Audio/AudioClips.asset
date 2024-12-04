@@ -15,11 +15,8 @@ MonoBehaviour:
   shootSounds:
     categoryName: Shoot Sound
     clips:
-    - {fileID: 8300000, guid: 7f3e070d592e80b4a938c1474f560668, type: 3}
-    - {fileID: 8300000, guid: c337e9f098b18ad45a9944483d159eae, type: 3}
-    - {fileID: 8300000, guid: 3da84a5976c80cb43af0ea25c08c7a0a, type: 3}
-    - {fileID: 8300000, guid: 34b17bcf7b705a94ca7680c2e502c373, type: 3}
-    - {fileID: 8300000, guid: c810fed1225bb55409f03a34eb57f952, type: 3}
+    - {fileID: 8300000, guid: eca10cc11e680404b986045f29427b0f, type: 3}
+    - {fileID: 8300000, guid: 7ae3c71a71eeb684498f30de7695fae0, type: 3}
   explosionSounds:
     categoryName: Asteroid Explosion
     clips:
@@ -36,7 +33,23 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 27f5c73783ea78c43af27fd557766dc1, type: 3}
     - {fileID: 8300000, guid: 4b8793a7e951cfa458f18a262593b1ba, type: 3}
     - {fileID: 8300000, guid: 84564895254dd414f9a31527f844d142, type: 3}
+  playerDeathSounds:
+    categoryName: Player Death
+    clips:
+    - {fileID: 8300000, guid: 6c5707ed7fdc41349a3ec07e3629a1c5, type: 3}
+    - {fileID: 8300000, guid: 70f008729a5c8de469334cdb981dae1b, type: 3}
+    - {fileID: 8300000, guid: c513971b4cf32374ea0af48bc30b5215, type: 3}
   thrusterSounds:
     categoryName: Thrusters
     clips:
-    - {fileID: 8300000, guid: 2f540b5ccbeaebd4591927d5af85a3a1, type: 3}
+    - {fileID: 8300000, guid: f4d3d47a0270fd1429c6b72affe62ee7, type: 3}
+  blackHoleSounds:
+    categoryName: BlackHole Spawn
+    clips:
+    - {fileID: 8300000, guid: 1aaa97c9a88643747a4847a31012b287, type: 3}
+  enemyShipSounds:
+    categoryName: Enemy Spawn
+    clips:
+    - {fileID: 8300000, guid: ec97dcc5a5d96bd40b45e7840e37c9aa, type: 3}
+    - {fileID: 8300000, guid: ae3104b21dfaa284897a9d599943d10d, type: 3}
+    - {fileID: 8300000, guid: 6bd72970672f0a34894be4934dd6c5c5, type: 3}

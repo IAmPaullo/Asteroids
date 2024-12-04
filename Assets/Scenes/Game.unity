@@ -1027,7 +1027,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3181715051788450705, guid: 28696356c09cb7743b258bcd7c4cb77f, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3592465735415196325, guid: 28696356c09cb7743b258bcd7c4cb77f, type: 3}
       propertyPath: m_Camera
@@ -1035,6 +1035,10 @@ PrefabInstance:
       objectReference: {fileID: 519420031}
     - target: {fileID: 6847384154077107566, guid: 28696356c09cb7743b258bcd7c4cb77f, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7254641357560041735, guid: 28696356c09cb7743b258bcd7c4cb77f, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8876381799055566304, guid: 28696356c09cb7743b258bcd7c4cb77f, type: 3}
@@ -1356,6 +1360,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Ship
       objectReference: {fileID: 0}
+    - target: {fileID: 7076368416475858423, guid: 57f59640a3ef6ed4bb04e59fa1ffcb2d, type: 3}
+      propertyPath: bulletPoolParent
+      value: 
+      objectReference: {fileID: 459220155}
     - target: {fileID: 7923857192012197249, guid: 57f59640a3ef6ed4bb04e59fa1ffcb2d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

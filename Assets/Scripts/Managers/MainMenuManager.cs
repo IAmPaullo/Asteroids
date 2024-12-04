@@ -1,5 +1,4 @@
 using UnityEngine;
-using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -9,11 +8,13 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject mainMenuCanvas;
     [SerializeField] private GameObject highScoresCanvas;
     [SerializeField] private GameObject controlsCanvas;
-    
+
     [Header("Buttons")]
     [SerializeField] private Button playButton;
     [SerializeField] private Button highScoresButton;
     [SerializeField] private Button soundToggleButton;
+    [SerializeField] private Sprite soundOnImage;
+    [SerializeField] private Sprite soundOffImage;
     [SerializeField] private Button controlsButton;
 
     [Header("Game Settings")]
@@ -27,6 +28,7 @@ public class MainMenu : MonoBehaviour
         highScoresButton.onClick.AddListener(ShowHighScores);
         soundToggleButton.onClick.AddListener(ToggleSound);
         controlsButton.onClick.AddListener(ShowControls);
+        soundToggleButton.GetComponent<Image>().sprite = playerConfig.isSoundActivated ? soundOnImage : soundOffImage;
     }
 
     public void StartGame()
@@ -37,17 +39,19 @@ public class MainMenu : MonoBehaviour
     public void ShowHighScores()
     {
         highScoresCanvas.SetActive(true);
-        mainMenuCanvas.SetActive(false);
+        //mainMenuCanvas.SetActive(false);
     }
 
     public void ShowControls()
     {
         controlsCanvas.SetActive(true);
-        mainMenuCanvas.SetActive(false);
+        //mainMenuCanvas.SetActive(false);
     }
 
     public void ToggleSound()
     {
+        var buttonImage = soundToggleButton.GetComponent<Image>();
+        buttonImage.sprite = playerConfig.isSoundActivated ? soundOffImage : soundOnImage;
         playerConfig.SwitchAudio();
     }
 
@@ -55,6 +59,11 @@ public class MainMenu : MonoBehaviour
     {
         highScoresCanvas.SetActive(false);
         controlsCanvas.SetActive(false);
+        mainMenuCanvas.SetActive(true);
+    }
+    public void ClosePanel(GameObject panel)
+    {
+        panel.SetActive(false);
         mainMenuCanvas.SetActive(true);
     }
 }

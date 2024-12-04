@@ -1,15 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class EnemyShipController : MonoBehaviour
 {
     public enum ShipType { Simple, Advanced }
 
     [Header("Enemy Ship Settings")]
+    [SerializeField] private float colliderEnableDelay = 1f;
     [SerializeField] private int points = 250;
     [SerializeField] private ShipType shipType;
     [SerializeField] private float speed = 2f;
     [SerializeField] private float shootingRate = 2f;
-    [SerializeField] private float detectionRange = 10f;
     [SerializeField] private BulletSpawner bulletSpawner;
     [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private GameEvents gameEvents;
@@ -22,6 +23,14 @@ public class EnemyShipController : MonoBehaviour
         shipType = GetShipType();
         this.player = player;
         isEnabled = true;
+        StartCoroutine(EnableCollider());
+    }
+
+    private IEnumerator EnableCollider()
+    {
+        Collider2D collider2D = GetComponent<Collider2D>();
+        yield return new WaitForSeconds(colliderEnableDelay);
+        collider2D.enabled = true;
     }
 
     private void Update()
