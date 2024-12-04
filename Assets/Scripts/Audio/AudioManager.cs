@@ -53,6 +53,7 @@ public class AudioManager : MonoBehaviour
     private void PlayThrusterSound()
     {
         if (!playerConfig.isSoundActivated) return;
+        thrusterAudioSource.volume = playerConfig.gameAudioVolume;
         if (!thrusterAudioSource.isPlaying)
         {
             thrusterAudioSource.clip = audioClipsConfig.GetThrusterSound();

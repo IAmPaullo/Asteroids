@@ -11,8 +11,7 @@ public class GameOverManager : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private ScoreData scoreData;
     [SerializeField] private GameEvents gameEvents;
-
-
+    [SerializeField] private PlayerConfig playerConfig;
 
     private void OnEnable()
     {
@@ -36,6 +35,6 @@ public class GameOverManager : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(playerConfig.MainMenuScene);
     }
 }

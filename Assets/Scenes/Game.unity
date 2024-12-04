@@ -747,6 +747,7 @@ MonoBehaviour:
   gameOverCanvas: {fileID: 2145625362}
   scoreData: {fileID: 11400000, guid: 7f3cd8c9caa9bc242b4a400968551653, type: 2}
   gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
+  playerConfig: {fileID: 0}
 --- !u!1 &1219805287
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,7 +782,7 @@ MonoBehaviour:
   poolSize: 3
   audioClipsConfig: {fileID: 11400000, guid: e52e1cc9f11d4ad48a068a0f3d9f51ae, type: 2}
   gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
-  playerConfig: {fileID: 0}
+  playerConfig: {fileID: 11400000, guid: f8ba1a74bf48ecd4ba7930ac63c10550, type: 2}
 --- !u!82 &1219805289
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1351,30 +1352,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3322895820245102185, guid: 57f59640a3ef6ed4bb04e59fa1ffcb2d, type: 3}
-      propertyPath: m_SortingOrder
-      value: -50
-      objectReference: {fileID: 0}
     - target: {fileID: 3985464804694234486, guid: 57f59640a3ef6ed4bb04e59fa1ffcb2d, type: 3}
       propertyPath: m_Name
       value: Player Ship
       objectReference: {fileID: 0}
-    - target: {fileID: 3985464804694234486, guid: 57f59640a3ef6ed4bb04e59fa1ffcb2d, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6188237648219395395, guid: 57f59640a3ef6ed4bb04e59fa1ffcb2d, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6382839458434375699, guid: 57f59640a3ef6ed4bb04e59fa1ffcb2d, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7076368416475858423, guid: 57f59640a3ef6ed4bb04e59fa1ffcb2d, type: 3}
-      propertyPath: bulletPoolParent
-      value: 
-      objectReference: {fileID: 459220155}
     - target: {fileID: 7923857192012197249, guid: 57f59640a3ef6ed4bb04e59fa1ffcb2d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

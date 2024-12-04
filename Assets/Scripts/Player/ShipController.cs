@@ -4,6 +4,9 @@ using UnityEngine;
 public class ShipController : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rigidBody;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private GameObject shipPartPrefab;
+    [SerializeField] private Sprite[] shipParts;
     [Header("Movement")]
     [SerializeField] private float thrustSpeed = 1f;
     [SerializeField] private float turnSpeed = 1f;
@@ -78,7 +81,7 @@ public class ShipController : MonoBehaviour
     private void HandleMovement()
     {
         float inputValue = isMobilePlatform ? Input.acceleration.x : Input.GetAxis("Horizontal");
-        Debug.Log(inputValue);
+        //Debug.Log(inputValue);
         float rotation = -inputValue * turnSpeed * Time.deltaTime;
         transform.Rotate(0, 0, rotation);
     }
@@ -130,8 +133,18 @@ public class ShipController : MonoBehaviour
     private void ShipDeath()
     {
         isAlive = false;
+        gameEvents.ThrusterStop();
         rigidBody.linearVelocity = Vector2.zero;
         rigidBody.angularVelocity = 0f;
+        spriteRenderer.enabled = false;
+        for (int i = 0; i < shipParts.Length; i++)
+        {
+            Vector2 rnd = new(Random.Range(-1, 1f), Random.Range(-1, 1f));
+            var part = Instantiate(shipPartPrefab, transform.position, Quaternion.identity);
+            part.GetComponent<SpriteRenderer>().sprite = shipParts[i];
+            part.GetComponent<Rigidbody2D>().AddForce(rnd, ForceMode2D.Impulse);
+        }
+
     }
     private void ShipReset()
     {

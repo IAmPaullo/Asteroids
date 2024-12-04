@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -8,16 +9,29 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject mainMenuCanvas;
     [SerializeField] private GameObject highScoresCanvas;
     [SerializeField] private GameObject controlsCanvas;
-    [SerializeField] private GameObject soundToggleButton;
-    [SerializeField] private TextMeshProUGUI soundButtonText;
+    
+    [Header("Buttons")]
+    [SerializeField] private Button playButton;
+    [SerializeField] private Button highScoresButton;
+    [SerializeField] private Button soundToggleButton;
+    [SerializeField] private Button controlsButton;
 
     [Header("Game Settings")]
     [SerializeField] private ScoreData scoreData;
     [SerializeField] private PlayerConfig playerConfig;
 
+
+    public void Start()
+    {
+        playButton.onClick.AddListener(StartGame);
+        highScoresButton.onClick.AddListener(ShowHighScores);
+        soundToggleButton.onClick.AddListener(ToggleSound);
+        controlsButton.onClick.AddListener(ShowControls);
+    }
+
     public void StartGame()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene(playerConfig.GameScene);
     }
 
     public void ShowHighScores()
@@ -35,7 +49,6 @@ public class MainMenu : MonoBehaviour
     public void ToggleSound()
     {
         playerConfig.SwitchAudio();
-        soundButtonText.text = playerConfig.isSoundActivated ? "Sound: ON" : "Sound: OFF";
     }
 
     public void ReturnToMainMenu()
