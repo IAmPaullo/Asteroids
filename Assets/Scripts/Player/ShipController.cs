@@ -15,15 +15,21 @@ public class ShipController : MonoBehaviour
     [SerializeField, Range(50f, 1000f)] private float maxThrustValue = 1f;
     [SerializeField, Range(50f, 1000f)] private float thrustSpeed = 1f;
     [SerializeField, Range(1f, 3f)] private float turnSpeed = 1f;
-    [SerializeField] private float lerpSpeed = 5f;
+    [SerializeField, Range(1f, 10f)] private float accelerationRate = 5f;
+    [SerializeField, Range(1f, 10f)] private float decelerationRate = 5f;
+    [SerializeField, Range(0.01f, .1f)] private float decelerationThreshold = 0.01f;
+    private float lerpSpeed = 1f;
     [Header("Shooting")]
     [SerializeField] private BulletSpawner bulletSpawner;
     [SerializeField] private Transform bulletSpawnPosition;
     [Header("Game Events")]
     [SerializeField] private GameEvents gameEvents;
 
+
+    [Header("Debug")]
     // thrusters
-    private float thrustInputValue;
+    [SerializeField] private float thrustInputValue;
+    float lerpValue;
     private bool isThrusterActive;
     private float lastUpdateTime;
     private bool isAlive = true;
@@ -73,7 +79,7 @@ public class ShipController : MonoBehaviour
     private void FixedUpdate()
     {
         if (!isAlive) return;
-        if (!isThrusting) return;
+        //if (!isThrusting) return;
         Thrust();
 
     }
@@ -83,8 +89,13 @@ public class ShipController : MonoBehaviour
     }
     private void Thrust()
     {
-        float lerpValue = isThrusting ? 0f : 1f;
+        lerpValue = isThrusting ? 1f : 0f;
+        lerpSpeed = isThrusting ? decelerationRate : accelerationRate;
         thrustInputValue = Mathf.Lerp(thrustInputValue, lerpValue, Time.deltaTime * lerpSpeed);
+        if (!isThrusting && thrustInputValue < decelerationThreshold)
+        {
+            thrustInputValue = 0f;
+        }
         float thrust = Mathf.Clamp(thrustInputValue * thrustSpeed * Time.deltaTime, 0f, maxThrustValue);
         rigidBody.linearVelocity = transform.up * thrust;
         HandleThrusterAudio(thrust);
