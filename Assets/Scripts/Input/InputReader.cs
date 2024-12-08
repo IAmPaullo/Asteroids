@@ -12,19 +12,24 @@ public class InputReader : ScriptableObject
     public event UnityAction<Vector2> RotateEvent;
     public event UnityAction ShootEvent;
     public event UnityAction ThrustEvent;
+    public event UnityAction StopThrustEvent;
+
 
 
 
     private InputAction rotateAction;
     private InputAction shootAction;
     private InputAction thrustAction;
+    private InputAction stopThrustAction;
 
 
     private void OnEnable()
     {
         rotateAction = _asset.FindAction("Rotate", true);
-        thrustAction = _asset.FindAction("Thrust", true);
         shootAction = _asset.FindAction("Shoot", true);
+        thrustAction = _asset.FindAction("Thrust", true);
+
+        // REMOVER OS STOP THRUST
 
 
         rotateAction.started += OnRotate;
@@ -39,10 +44,9 @@ public class InputReader : ScriptableObject
         thrustAction.performed += OnThrust;
         thrustAction.canceled += OnThrust;
 
-
         rotateAction.Enable();
-        thrustAction.Enable();
         shootAction.Enable();
+        thrustAction.Enable();
     }
     private void OnDisable()
     {
@@ -60,24 +64,25 @@ public class InputReader : ScriptableObject
         thrustAction.canceled -= OnThrust;
 
         rotateAction.Disable();
-        thrustAction.Disable();
         shootAction.Disable();
+        thrustAction.Disable();
     }
 
     private void OnRotate(InputAction.CallbackContext context)
     {
         RotateEvent?.Invoke(context.ReadValue<Vector2>());
+        Debug.LogWarning(context.ReadValue<Vector2>());
     }
     private void OnShoot(InputAction.CallbackContext context)
     {
-        ShootEvent?.Invoke();
+        if (ShootEvent != null && context.performed)
+            ShootEvent?.Invoke();
     }
     private void OnThrust(InputAction.CallbackContext context)
     {
         if (ThrustEvent != null && context.started)
             ThrustEvent?.Invoke();
+        if (StopThrustEvent != null && context.canceled)
+            StopThrustEvent?.Invoke();
     }
-
-
-
 }
