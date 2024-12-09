@@ -1,0 +1,8 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=26a7270116fcb224190761e09370fbb5&amp;type=3#MainMenuStyle" />
+    <engine:VisualElement name="Container" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Art/Menu/menu%20img%20ruido.png?fileID=-7775807550792641664&amp;guid=20a7116aed9f07a48874870af5ba1eb7&amp;type=3#menu img ruido_0&quot;);">
+        <engine:Label text="Main Menu" name="Header" enable-rich-text="true" class="header" />
+        <engine:Button enable-rich-text="false" emoji-fallback-support="false" name="StartGameButton" class="button" style="background-image: url(&quot;project://database/Assets/Art/Menu/play.png?fileID=21300000&amp;guid=4dfcbc89d3be4c54b83a47f2a702fed1&amp;type=3#play&quot;); background-color: rgba(255, 255, 255, 0); background-repeat: no-repeat no-repeat; top: 410px; left: 824px;" />
+        <engine:Button enable-rich-text="false" emoji-fallback-support="false" name="HighScoreButton" class="button" style="background-image: url(&quot;project://database/Assets/Art/Menu/highscores.png?fileID=21300000&amp;guid=9eab4dfea66042445bef9fc187f0279b&amp;type=3#highscores&quot;); background-color: rgba(255, 255, 255, 0); background-repeat: no-repeat no-repeat; top: 490px; left: 824px; -unity-text-align: middle-center;" />
+    </engine:VisualElement>
+</engine:UXML>
