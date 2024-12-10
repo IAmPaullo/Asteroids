@@ -19,8 +19,8 @@ public class BulletSpawner : MonoBehaviour
 
         if (bullet != null)
         {
-            bullet.InitializeBullet(this, position, direction, isEnemyBullet);
-            bullet.gameObject.SetActive(true);
+            //bullet.InitializeBullet(this, position, direction, isEnemyBullet);
+            //bullet.gameObject.SetActive(true);
         }
     }
 

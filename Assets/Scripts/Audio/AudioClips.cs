@@ -1,59 +1,33 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Game.Audio;
 
 [CreateAssetMenu(fileName = "AudioClipsConfig", menuName = "Game/AudioClips")]
 public class AudioClipsConfig : ScriptableObject
 {
-    [SerializeField] private SoundCategory shootSounds;
-    [SerializeField] private SoundCategory explosionSounds;
-    [SerializeField] private SoundCategory playerDamagedSounds;
-    [SerializeField] private SoundCategory playerDeathSounds;
-    [SerializeField] private SoundCategory thrusterSounds;
-    [SerializeField] private SoundCategory blackHoleSounds;
-    [SerializeField] private SoundCategory enemyShipSounds;
-    [SerializeField] private SoundCategory levelStartSounds;
+    [SerializeField] private List<SoundCategory> soundCategories = new();
 
-    public AudioClip GetRandomShootSound() => shootSounds?.GetRandomClip();
-    public AudioClip GetRandomExplosionSound() => explosionSounds?.GetRandomClip();
-    public AudioClip GetRandomDamageSound() => playerDamagedSounds?.GetRandomClip();
-    public AudioClip GetRandomDeathSound() => playerDeathSounds?.GetRandomClip();
-    public AudioClip GetThrusterSound() => thrusterSounds?.GetRandomClip();
-    public AudioClip GetRandomBlackHoleSound() => blackHoleSounds?.GetRandomClip();
-    public AudioClip GetRandomEnemyShipSound() => enemyShipSounds?.GetRandomClip();
-    public AudioClip GetRandomLevelStartSound() => levelStartSounds?.GetRandomClip();
-
-    public AudioClip GetRandomSound(SoundCategory category) => category?.GetRandomClip();
-
-    public AudioClip GetSpecificSound(SoundCategory category, int index) =>
-        category?.GetSpecificClip(index);
-
-}
-
-[Serializable]
-public class SoundCategory
-{
-    [SerializeField] private string categoryName;
-    [SerializeField] private AudioClip[] clips;
-
-    public AudioClip GetRandomClip()
+    public void AddSoundCategory(SoundCategory category)
     {
-        if (clips == null || clips.Length == 0)
-        {
-            Debug.LogWarning($"No clips found in category: {categoryName}");
-            return null;
-        }
-        return clips[UnityEngine.Random.Range(0, clips.Length)];
+        soundCategories.Add(category);
     }
 
-    public AudioClip GetSpecificClip(int index)
+    public SoundCategory GetSoundCategory(string categoryName)
     {
-        if (clips == null || index < 0 || index >= clips.Length)
-        {
-            Debug.LogWarning($"Invalid clip index in category: {categoryName}");
-            return null;
-        }
-        return clips[index];
+        return soundCategories.FirstOrDefault(c =>
+            string.Equals(c.CategoryName, categoryName, StringComparison.OrdinalIgnoreCase));
+    }
+    public AudioClip GetRandomClip(string categoryName)
+    {
+        var category = GetSoundCategory(categoryName);
+        return category?.GetRandomClip();
     }
 
-    public int ClipCount => clips?.Length ?? 0;
+    public List<string> GetCategoryNames()
+    {
+        return soundCategories.Select(c => c.CategoryName).ToList();
+    }
+
 }

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19f8d397413262d4b8fa7b9f1babf763, type: 3}
+  m_Name: Default Ship
+  m_EditorClassIdentifier: 
+  ID: 0
+  ShipName: Default
+  ShipDescription: Default Ship
+  shipHealth: 3
+  shipShield: 1
+  maxThrustValue: 50
+  turnSpeed: 1
+  accelerationRate: 5
+  decelerationRate: 5
+  decelerationThreshold: 0.01
+  shootCooldown: 0.4
+  shipSprite: {fileID: -5573455724340667265, guid: f4233c5e829dd8f498ab70780390dc87, type: 3}
+  brokenShipPiecesSprite:
+  - {fileID: -1861314433827203952, guid: 7436c5094844a23489bc2058982f0c37, type: 3}
+  - {fileID: -1704213779489483714, guid: 56831d62f1996fe4f99de9c0bdf0ed67, type: 3}
+  - {fileID: -3216493939947872053, guid: ea362d054703c1d439eee9a5c1f5131f, type: 3}
+  - {fileID: -8186108852757421052, guid: 05e7c7d1fd136c04cb2de6ea048b73db, type: 3}
+  - {fileID: -159783487067875656, guid: 4d879fe6209f9c5438fa8929dd641bdc, type: 3}
+  - {fileID: -331875709885016742, guid: 7b8c61b9032ba3147be52209415119ef, type: 3}
+  - {fileID: 2132045454948129060, guid: f857ba371f2f4e343a87fac903a03d04, type: 3}
+  - {fileID: -3049295074844861998, guid: 422f5a240445d18458dff7ea38d66bf5, type: 3}
+  - {fileID: 517785175973506632, guid: 12d4ec0cfe63d094dbce82827413eff1, type: 3}
+  - {fileID: -5194969135727689576, guid: d12f3260d5b43964f80cd6d0bdfa332e, type: 3}
+  - {fileID: -5950302936974538974, guid: fa5f4a37f31a61f48bcb1e5955245ac5, type: 3}
+  - {fileID: 8387013987807218027, guid: 32e50a041bd5c154687be2035cb04eff, type: 3}
+  - {fileID: 7524627322550844204, guid: 9d8f65b8bf229e94f94728916fb4bcf0, type: 3}
+  explosionParticles: {fileID: 0}
+  thrustersParticles: {fileID: 0}

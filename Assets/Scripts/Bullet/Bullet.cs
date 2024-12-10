@@ -8,21 +8,22 @@ public class Bullet : MonoBehaviour
     private float lifeTimer;
 
 
-    private BulletSpawner spawner;
+    private ShipWeaponSystem spawner;
     private Vector2 direction;
     private bool isEnemyBullet;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
 
-
-    public void InitializeBullet(BulletSpawner spawner, Vector3 position, Vector2 direction, bool isEnemyBullet = false)
+    //implement bullet sprite
+    public void InitializeBullet(ShipWeaponSystem spawner, Vector3 position, Vector2 direction, float speed = 10f, bool isEnemyBullet = false)
     {
         this.spawner = spawner;
         this.direction = direction;
         transform.position = position;
         lifeTimer = lifetime;
         this.isEnemyBullet = isEnemyBullet;
-        spriteRenderer?.transform.DORotate(new Vector3(0, 0, 360), lifeTimer, RotateMode.FastBeyond360)
+        this.speed = speed;
+        spriteRenderer.transform.DORotate(new Vector3(0, 0, 360), lifeTimer, RotateMode.FastBeyond360)
             .SetLoops(-1, LoopType.Incremental);
     }
 
@@ -44,30 +45,30 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!isEnemyBullet)
-        {
-            if (collision.TryGetComponent<Asteroid>(out Asteroid asteroid))
-            {
-                asteroid.BreakAsteroid();
-                ReturnToPool();
-            }
-            else if (collision.TryGetComponent(out EnemyShipController enemy))
-            {
-                enemy.DestroyShip();
-            }
-        }
-        else
-        {
-            if (collision.TryGetComponent<Asteroid>(out Asteroid asteroid))
-            {
-                asteroid.BreakAsteroid(false);
-                ReturnToPool();
-            }
-            else if (collision.TryGetComponent(out ShipController player))
-            {
-                player.Damage();
-            }
-        }
+        //if (!isEnemyBullet)
+        //{
+        //    if (collision.TryGetComponent<Asteroid>(out Asteroid asteroid))
+        //    {
+        //        asteroid.BreakAsteroid();
+        //        ReturnToPool();
+        //    }
+        //    else if (collision.TryGetComponent(out EnemyShipController enemy))
+        //    {
+        //        enemy.DestroyShip();
+        //    }
+        //}
+        //else
+        //{
+        //    if (collision.TryGetComponent<Asteroid>(out Asteroid asteroid))
+        //    {
+        //        asteroid.BreakAsteroid(false);
+        //        ReturnToPool();
+        //    }
+        //    else if (collision.TryGetComponent(out ShipController player))
+        //    {
+        //        player.Damage();
+        //    }
+        //}
     }
 
     private void ReturnToPool()

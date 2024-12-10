@@ -1,187 +1,128 @@
+using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class ShipController : MonoBehaviour
 {
-    [Header("Input")]
-    public InputReader Input;
-
-
-    [SerializeField] private Rigidbody2D rigidBody;
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private GameObject shipPartPrefab;
-    [SerializeField] private Sprite[] shipParts;
-    [Header("Movement")]
-    [SerializeField, Range(50f, 1000f)] private float maxThrustValue = 1f;
-    [SerializeField, Range(50f, 1000f)] private float thrustSpeed = 1f;
-    [SerializeField, Range(1f, 3f)] private float turnSpeed = 1f;
-    [SerializeField, Range(1f, 10f)] private float accelerationRate = 5f;
-    [SerializeField, Range(1f, 10f)] private float decelerationRate = 5f;
-    [SerializeField, Range(0.01f, .1f)] private float decelerationThreshold = 0.01f;
-    private float lerpSpeed = 1f;
-    [Header("Shooting")]
-    [SerializeField] private BulletSpawner bulletSpawner;
-    [SerializeField] private Transform bulletSpawnPosition;
-    [Header("Game Events")]
+    [SerializeField] private InputReader inputReader;
     [SerializeField] private GameEvents gameEvents;
-
+    [SerializeField] private PlayerStatsSO playerStats;
 
     [Header("Debug")]
-    // thrusters
-    [SerializeField] private float thrustInputValue;
-    float lerpValue;
-    private bool isThrusterActive;
-    private float lastUpdateTime;
-    private bool isAlive = true;
-    public bool isThrusting;
-    private float targetRotation;
+    private ShipWeaponSystem shipWeaponSystem;
+    public GunConfiguration gun; // teste
+    public Ship ship;// teste
 
-    private bool IsMobilePlatform
+
+    private bool isAlive
     {
         get
         {
-            return UnityEngine.Device.Application.isMobilePlatform;
+            return playerStats.IsAlive;
         }
     }
-    #region enable
+
+
+
     private void OnEnable()
     {
-        #region Input
-        Input.RotateEvent += HandleRotation;
-        Input.ThrustEvent += OnThrust;
-        Input.StopThrustEvent += OnStopThrust;
-        Input.ShootEvent += Shoot;
-        #endregion
+        if (inputReader != null)
+        {
+            inputReader.RotateEvent += OnRotateInput;
+            inputReader.ShootEvent += OnShootInput;
+            inputReader.ThrustEvent += OnThrustInput;
+            inputReader.StopThrustEvent += OnStopThrustInput;
+        }
 
-        gameEvents.OnPlayerDeath += ShipDeath;
-        gameEvents.OnGameReset += ShipReset;
+        gameEvents.OnPlayerDeath += OnDeath;
+        gameEvents.OnGameReset += OnReset;
+        gameEvents.OnPlayerDamaged += OnDamage;
+        gameEvents.OnPlayerHeal += OnHeal;
+        gameEvents.OnShieldIncrease += OnIncreaseShield;
     }
 
     private void OnDisable()
     {
-        #region Input
-        Input.RotateEvent -= HandleRotation;
-        Input.ThrustEvent -= OnThrust;
-        Input.StopThrustEvent -= OnStopThrust;
-        Input.ShootEvent += Shoot;
-        #endregion
-        gameEvents.OnPlayerDeath -= ShipDeath;
-        gameEvents.OnGameReset -= ShipReset;
-    }
-    #endregion
-    private void Update()
-    {
-        if (!isAlive) return;
-        Rotate();
-    }
-
-
-    private void FixedUpdate()
-    {
-        if (!isAlive) return;
-        //if (!isThrusting) return;
-        Thrust();
-
-    }
-    private void Rotate()
-    {
-        transform.Rotate(0, 0, targetRotation);
-    }
-    private void Thrust()
-    {
-        lerpValue = isThrusting ? 1f : 0f;
-        lerpSpeed = isThrusting ? decelerationRate : accelerationRate;
-        thrustInputValue = Mathf.Lerp(thrustInputValue, lerpValue, Time.deltaTime * lerpSpeed);
-        if (!isThrusting && thrustInputValue < decelerationThreshold)
+        if (inputReader != null)
         {
-            thrustInputValue = 0f;
+            inputReader.RotateEvent -= OnRotateInput;
+            inputReader.ShootEvent -= OnShootInput;
+            inputReader.ThrustEvent -= OnThrustInput;
+            inputReader.StopThrustEvent -= OnStopThrustInput;
         }
-        float thrust = Mathf.Clamp(thrustInputValue * thrustSpeed * Time.deltaTime, 0f, maxThrustValue);
-        rigidBody.linearVelocity = transform.up * thrust;
-        HandleThrusterAudio(thrust);
-    }
-    private void OnThrust()
-    {
-        isThrusting = true;
-    }
-    private void OnStopThrust()
-    {
-        isThrusting = false;
+        gameEvents.OnPlayerDeath -= OnDeath;
+        gameEvents.OnGameReset -= OnReset;
+        gameEvents.OnPlayerHeal -= OnHeal;
+        gameEvents.OnShieldIncrease -= OnIncreaseShield;
     }
 
-    public void Shoot()
+    private void Awake()
+    {
+        InitializeShip();
+        LoadPlayerStats();
+    }
+
+    private void LoadPlayerStats()
+    {
+        playerStats.RegisterPlayerStats(ship);
+    }
+
+    private void InitializeShip()
+    {
+        var shipWeaponSystem = GetComponent<ShipWeaponSystem>();
+        var movement = GetComponent<ShipMovement>();
+        var graphics = GetComponentInChildren<ShipGraphics>();
+        shipWeaponSystem.InitWeaponSystem(gun);
+        movement.ConfigureMovement(ship);
+        graphics.InitGraphics(ship.ShipSprite);
+    }
+
+    private void OnRotateInput(Vector2 input)
     {
         if (!isAlive) return;
-        Vector2 direction = transform.up;
-        bulletSpawner.SpawnBullet(bulletSpawnPosition.position, direction);
+        gameEvents.RotateEvent(input);
+    }
+
+    private void OnShootInput()
+    {
+        if (!isAlive) return;
         gameEvents.OnShoot();
     }
 
-    private void HandleRotation(Vector2 rotationInput)
+    private void OnThrustInput()
     {
         if (!isAlive) return;
-        float inputValue = IsMobilePlatform ? UnityEngine.Input.acceleration.x : rotationInput.x;
-        targetRotation = -inputValue * turnSpeed;
+        gameEvents.ThrusterStart();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnStopThrustInput()
     {
-        if (collision.collider.CompareTag("Asteroid"))
-        {
-            Damage();
-        }
-    }
-    public void Damage()
-    {
-        gameEvents?.PlayerDamaged();
-        Debug.Log("Player hit by asteroid");
-    }
-
-    private void HandleThrusterAudio(float thruster)
-    {
-        if (Time.time - lastUpdateTime > 0.2f)
-        {
-            if (thruster > 0)
-            {
-                if (!isThrusterActive)
-                {
-                    gameEvents.ThrusterStart();
-                    isThrusterActive = true;
-                }
-            }
-            else
-            {
-                if (isThrusterActive)
-                {
-                    gameEvents.ThrusterStop();
-                    isThrusterActive = false;
-                }
-            }
-            lastUpdateTime = Time.time;
-        }
-    }
-
-    private void ShipDeath()
-    {
-        isAlive = false;
+        if (!isAlive) return;
         gameEvents.ThrusterStop();
-        rigidBody.linearVelocity = Vector2.zero;
-        rigidBody.angularVelocity = 0f;
-        spriteRenderer.enabled = false;
-        for (int i = 0; i < shipParts.Length; i++)
-        {
-            Vector2 rnd = new(Random.Range(-1, 1f), Random.Range(-1, 1f));
-            var part = Instantiate(shipPartPrefab, transform.position, Quaternion.identity);
-            part.GetComponent<SpriteRenderer>().sprite = shipParts[i];
-            part.GetComponent<Rigidbody2D>().AddForce(rnd, ForceMode2D.Impulse);
-        }
-
     }
-    private void ShipReset()
+
+    private void OnDeath()
     {
-        isAlive = true;
+        gameEvents.PlayerDeath();
+    }
+    private void OnDamage()
+    {
+        if (!isAlive) return;
+        playerStats.Damage();
+    }
+    private void OnHeal(int amount)
+    {
+        if (!isAlive) return;
+        playerStats.Heal(amount);
+    }
+
+    private void OnIncreaseShield()
+    {
+        if (!isAlive) return;
+        playerStats.IncreaseCurrentShield();
+    }
+
+    private void OnReset()
+    {
+        playerStats.ResetPlayerStats();
     }
 }
-
-
-

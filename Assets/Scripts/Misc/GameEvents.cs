@@ -4,7 +4,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameEvents", menuName = "Game/GameEvents")]
 public class GameEvents : ScriptableObject
 {
-
+    public event Action<int> OnPlayerHeal;
+    public event Action OnShieldIncrease;
     #region Level Events
     public event Action OnGameReset;
     public event Action OnGameOver;
@@ -22,6 +23,7 @@ public class GameEvents : ScriptableObject
     public event Action<int> OnAsteroidDestroyed;
     public event Action<int> OnEnemyShipDestroyed;
     public event Action<int> OnAddAsteroids;
+    public event Action<Vector2> OnRotateEvent;
     public event Action OnLevelUp;
     public event Action HUDUpdate;
     public event Action OnThrusterStart;
@@ -34,7 +36,6 @@ public class GameEvents : ScriptableObject
     public event Action OnPlayerDamagedSound;
     #endregion
 
-
     #region Player Methods
     public void AsteroidDestroyed(int points)
     {
@@ -42,85 +43,93 @@ public class GameEvents : ScriptableObject
         OnAsteroidDestroyed?.Invoke(points);
         PlayExplosionSound();
     }
+
     public void EnemyShipDestroyed(int points)
     {
         if (points <= 0) return;
         OnEnemyShipDestroyed?.Invoke(points);
         PlayExplosionSound();
     }
+
     public void OnShoot()
     {
         OnShootSound?.Invoke();
     }
+
     public void PlayerDamaged()
     {
         OnPlayerDamaged?.Invoke();
     }
+
     public void PlayerDeath()
     {
         OnPlayerDeath?.Invoke();
     }
+
+    public void RotateEvent(Vector2 input)
+    {
+        OnRotateEvent?.Invoke(input);
+    }
+
     public void LevelUp()
     {
         OnLevelUp?.Invoke();
     }
+
     public void HUDUpdated()
     {
         HUDUpdate?.Invoke();
     }
+
     public void WrapAround()
     {
         OnWrapAround?.Invoke();
     }
+
     public void ThrusterStart()
     {
         OnThrusterStart?.Invoke();
     }
-
 
     public void ThrusterStop()
     {
         OnThrusterStop?.Invoke();
     }
     #endregion
-    public void AddAsteroids(int count)
-    {
-        OnAddAsteroids?.Invoke(count);
-    }
-    public void SetAsteroidsToSpawn(int count)
-    {
-        OnSetAsteroidsToSpawn?.Invoke(count);
-    }
-    #region Sound Methods
 
-    public void PlayExplosionSound()
-    {
-        OnExplosionSound?.Invoke();
-    }
-    public void PlayPlayerDamagedSound()
-    {
-        OnPlayerDamagedSound?.Invoke();
-    }
-    #endregion
     #region Level Manager Methods
     public void LevelStart()
     {
         OnLevelStart?.Invoke();
     }
+
     public void LevelComplete()
     {
         OnLevelComplete?.Invoke();
     }
+
     public void SpawnBlackHole()
     {
         OnSpawnBlackHole?.Invoke();
     }
     #endregion
 
+    #region General Methods
+    public void AddAsteroids(int count)
+    {
+        OnAddAsteroids?.Invoke(count);
+    }
+
+    public void SetAsteroidsToSpawn(int count)
+    {
+        OnSetAsteroidsToSpawn?.Invoke(count);
+    }
+
     public void GameReset()
     {
         OnGameReset?.Invoke();
     }
+
     public void GameOver()
     {
         OnGameOver?.Invoke();
@@ -130,4 +139,17 @@ public class GameEvents : ScriptableObject
     {
         OnSpawnEnemyShip?.Invoke();
     }
+    #endregion
+
+    #region Sound Methods
+    public void PlayExplosionSound()
+    {
+        OnExplosionSound?.Invoke();
+    }
+
+    public void PlayPlayerDamagedSound()
+    {
+        OnPlayerDamagedSound?.Invoke();
+    }
+    #endregion
 }

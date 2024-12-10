@@ -68,18 +68,18 @@ public class AudioManager : MonoBehaviour
     {
         if (Time.time - lastShootTime >= shootCooldown)
         {
-            PlaySound(audioClipsConfig.GetRandomShootSound());
+            PlaySound(audioClipsConfig.GetRandomClip("PlayerShoots"));
             lastShootTime = Time.time;
         }
     }
     private void PlayPlayerDamagedSound()
     {
-        PlaySound(audioClipsConfig.GetRandomDamageSound());
+        PlaySound(audioClipsConfig.GetRandomClip("PlayerDamages"));
     }
 
     private void PlayPlayerDeathSound()
     {
-        PlaySound(audioClipsConfig.GetRandomDeathSound());
+        PlaySound(audioClipsConfig.GetRandomClip("DeathSounds"));
     }
 
     private void PlayThrusterSound()
@@ -88,7 +88,7 @@ public class AudioManager : MonoBehaviour
         thrusterAudioSource.volume = playerConfig.gameAudioVolume;
         if (!thrusterAudioSource.isPlaying)
         {
-            thrusterAudioSource.clip = audioClipsConfig.GetThrusterSound();
+            thrusterAudioSource.clip = audioClipsConfig.GetRandomClip("ThrusterSounds");
             thrusterAudioSource.loop = true;
             thrusterAudioSource.Play();
         }
@@ -106,14 +106,14 @@ public class AudioManager : MonoBehaviour
     #region Enemy
     private void PlaySpawnEnemyShipSound()
     {
-        PlaySound(audioClipsConfig.GetRandomEnemyShipSound());
+        PlaySound(audioClipsConfig.GetRandomClip("EnemySpawnSounds"));
     }
     #endregion
 
     #region Obstacles
     private void PlayBlackHoleSpawn()
     {
-        PlaySound(audioClipsConfig.GetRandomBlackHoleSound());
+        PlaySound(audioClipsConfig.GetRandomClip("BlackHoleSounds"));
     }
     #endregion
 
@@ -121,11 +121,11 @@ public class AudioManager : MonoBehaviour
 
     private void PlayStartLevelSound()
     {
-        PlaySound(audioClipsConfig.GetRandomLevelStartSound(), isHighPriority: true);
+        PlaySound(audioClipsConfig.GetRandomClip("LevelStartSound"), isHighPriority: true);
     }
     private void PlayExplosionSound()
     {
-        PlaySound(audioClipsConfig.GetRandomExplosionSound(), true);
+        PlaySound(audioClipsConfig.GetRandomClip("ExplosionSound"), true);
     }
 
     #endregion
