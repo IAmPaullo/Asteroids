@@ -28,13 +28,13 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) // TODO switch to new input
-        {
-            if (isPaused)
-                ResumeGame();
-            else
-                PauseGame();
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape)) // TODO switch to new input
+        //{
+        //    if (isPaused)
+        //        ResumeGame();
+        //    else
+        //        PauseGame();
+        //}
     }
 
     private void PauseGame()

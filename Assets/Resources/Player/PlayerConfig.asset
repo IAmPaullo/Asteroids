@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4ab4dd145de55b49ac3cfd80750db29, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  isSoundActivated: 0
-  MainMenuScene: MainMenu
-  GameScene: Game
-  gameAudioVolume: 0.12529261
+  MainMenuScene: 
+  GameScene: 
+  gameAudioVolume: 0.5
+  isSoundActivated: 1

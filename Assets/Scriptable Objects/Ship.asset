@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19f8d397413262d4b8fa7b9f1babf763, type: 3}
+  m_Name: Ship
+  m_EditorClassIdentifier: 
+  ID: 0
+  shipName: 
+  shipDescription: 
+  shipHealth: 3
+  shipShield: 1
+  maxThrustValue: 50
+  turnSpeed: 1
+  accelerationRate: 5
+  decelerationRate: 5
+  decelerationThreshold: 0.01
+  shootCooldown: 0.4
+  shipSprite: {fileID: -5573455724340667265, guid: f4233c5e829dd8f498ab70780390dc87, type: 3}
+  brokenShipPiecesSprite: []
+  projectileSprite: {fileID: 0}
+  explosionParticles: {fileID: 0}
+  thrustersParticles: {fileID: 0}

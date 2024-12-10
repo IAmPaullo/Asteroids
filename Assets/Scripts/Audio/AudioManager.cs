@@ -18,6 +18,7 @@ public class AudioManager : MonoBehaviour
     [Header("Game Events")]
     [SerializeField] private GameEvents gameEvents;
     [SerializeField] private PlayerConfig playerConfig;
+    [SerializeField] private InputReader inputReader;
 
 
     private readonly float shootCooldown = 0.1f;
@@ -41,7 +42,7 @@ public class AudioManager : MonoBehaviour
         gameEvents.OnThrusterStart += PlayThrusterSound;
         gameEvents.OnThrusterStop += StopThrusterSound;
         gameEvents.OnPlayerDeath += PlayPlayerDeathSound;
-        gameEvents.OnSpawnBlackHole += PlayBlackHoleSound;
+        gameEvents.OnSpawnBlackHole += PlayBlackHoleSpawn;
         gameEvents.OnSpawnEnemyShip += PlaySpawnEnemyShipSound;
     }
 
@@ -53,12 +54,33 @@ public class AudioManager : MonoBehaviour
         gameEvents.OnThrusterStart -= PlayThrusterSound;
         gameEvents.OnThrusterStop -= StopThrusterSound;
         gameEvents.OnPlayerDeath -= PlayPlayerDeathSound;
-        gameEvents.OnSpawnBlackHole -= PlayBlackHoleSound;
+        gameEvents.OnSpawnBlackHole -= PlayBlackHoleSpawn;
         gameEvents.OnSpawnEnemyShip -= PlaySpawnEnemyShipSound;
 
     }
 
 
+    #region Player Events
+
+
+
+    private void PlayShootSound()
+    {
+        if (Time.time - lastShootTime >= shootCooldown)
+        {
+            PlaySound(audioClipsConfig.GetRandomShootSound());
+            lastShootTime = Time.time;
+        }
+    }
+    private void PlayPlayerDamagedSound()
+    {
+        PlaySound(audioClipsConfig.GetRandomDamageSound());
+    }
+
+    private void PlayPlayerDeathSound()
+    {
+        PlaySound(audioClipsConfig.GetRandomDeathSound());
+    }
 
     private void PlayThrusterSound()
     {
@@ -71,7 +93,6 @@ public class AudioManager : MonoBehaviour
             thrusterAudioSource.Play();
         }
     }
-
     private void StopThrusterSound()
     {
         if (thrusterAudioSource.isPlaying)
@@ -79,36 +100,37 @@ public class AudioManager : MonoBehaviour
             thrusterAudioSource.Stop();
         }
     }
-    private void PlayShootSound()
-    {
-        if (Time.time - lastShootTime >= shootCooldown)
-        {
-            PlaySound(audioClipsConfig.GetRandomShootSound());
-            lastShootTime = Time.time;
-        }
-    }
+    #endregion
 
+
+    #region Enemy
+    private void PlaySpawnEnemyShipSound()
+    {
+        PlaySound(audioClipsConfig.GetRandomEnemyShipSound());
+    }
+    #endregion
+
+    #region Obstacles
+    private void PlayBlackHoleSpawn()
+    {
+        PlaySound(audioClipsConfig.GetRandomBlackHoleSound());
+    }
+    #endregion
+
+    #region Level/Misc Events
+
+    private void PlayStartLevelSound()
+    {
+        PlaySound(audioClipsConfig.GetRandomLevelStartSound(), isHighPriority: true);
+    }
     private void PlayExplosionSound()
     {
         PlaySound(audioClipsConfig.GetRandomExplosionSound(), true);
     }
 
-    private void PlayPlayerDamagedSound()
-    {
-        PlaySound(audioClipsConfig.GetRandomDamageSound());
-    }
-    private void PlayPlayerDeathSound()
-    {
-        PlaySound(audioClipsConfig.GetRandomDeathSound());
-    }
-    private void PlayBlackHoleSound()
-    {
-        PlaySound(audioClipsConfig.GetRandomBlackHoleSound());
-    }
-    private void PlaySpawnEnemyShipSound()
-    {
-        PlaySound(audioClipsConfig.GetRandomEnemyShipSound());
-    }
+    #endregion
+
+    #region Utility
     private void PlaySound(AudioClip clip, bool randomPitch = false, bool isHighPriority = false)
     {
         if (clip == null || !playerConfig.isSoundActivated) return;
@@ -132,7 +154,6 @@ public class AudioManager : MonoBehaviour
         audioSource.PlayOneShot(clip);
         StartCoroutine(ReturnAudioSourceToPool(audioSource, clip.length));
     }
-
     private AudioSource StopAndReuseAudioSource()
     {
         AudioSource audioSource = audioSourcePool.Peek();
@@ -148,9 +169,5 @@ public class AudioManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         audioSourcePool.Enqueue(audioSource);
     }
-
-    private void SwitchAudioVolume()
-    {
-        float volume = playerConfig.isSoundActivated ? 1f : 0f;
-    }
+    #endregion
 }

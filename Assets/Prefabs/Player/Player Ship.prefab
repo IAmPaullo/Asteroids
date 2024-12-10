@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae9cb77b3373b744abe59cfbbc74ee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Input: {fileID: 11400000, guid: 69b6ba19815a5a94195d9d48c2e48899, type: 2}
   rigidBody: {fileID: 2563134539911796016}
   spriteRenderer: {fileID: 3322895820245102185}
   shipPartPrefab: {fileID: 6575567416770352989, guid: f5654b9750c317042b5f3edb4506659c, type: 3}
