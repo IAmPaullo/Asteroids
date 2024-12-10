@@ -810,6 +810,7 @@ MonoBehaviour:
   audioClipsConfig: {fileID: 11400000, guid: e52e1cc9f11d4ad48a068a0f3d9f51ae, type: 2}
   gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
   playerConfig: {fileID: 11400000, guid: f8ba1a74bf48ecd4ba7930ac63c10550, type: 2}
+  inputReader: {fileID: 0}
 --- !u!82 &1219805289
 AudioSource:
   m_ObjectHideFlags: 0

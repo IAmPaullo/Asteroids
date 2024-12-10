@@ -14,14 +14,12 @@ public class InputReader : ScriptableObject
     public event UnityAction ThrustEvent;
     public event UnityAction StopThrustEvent;
 
-
-
-
     private InputAction rotateAction;
     private InputAction shootAction;
     private InputAction thrustAction;
     private InputAction stopThrustAction;
 
+  
 
     private void OnEnable()
     {

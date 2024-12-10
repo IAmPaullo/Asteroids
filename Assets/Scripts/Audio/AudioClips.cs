@@ -11,6 +11,7 @@ public class AudioClipsConfig : ScriptableObject
     [SerializeField] private SoundCategory thrusterSounds;
     [SerializeField] private SoundCategory blackHoleSounds;
     [SerializeField] private SoundCategory enemyShipSounds;
+    [SerializeField] private SoundCategory levelStartSounds;
 
     public AudioClip GetRandomShootSound() => shootSounds?.GetRandomClip();
     public AudioClip GetRandomExplosionSound() => explosionSounds?.GetRandomClip();
@@ -19,11 +20,13 @@ public class AudioClipsConfig : ScriptableObject
     public AudioClip GetThrusterSound() => thrusterSounds?.GetRandomClip();
     public AudioClip GetRandomBlackHoleSound() => blackHoleSounds?.GetRandomClip();
     public AudioClip GetRandomEnemyShipSound() => enemyShipSounds?.GetRandomClip();
+    public AudioClip GetRandomLevelStartSound() => levelStartSounds?.GetRandomClip();
 
     public AudioClip GetRandomSound(SoundCategory category) => category?.GetRandomClip();
 
     public AudioClip GetSpecificSound(SoundCategory category, int index) =>
         category?.GetSpecificClip(index);
+
 }
 
 [Serializable]

@@ -26,8 +26,6 @@ public class SoundManagerSO : ScriptableObject
     [SerializeField] private AudioClipsConfig audioClipsConfig;
 
 
-
-    //keeps record of all pool types
     private Dictionary<string, Queue<AudioSource>> audioSourcePools = new();
 
 
