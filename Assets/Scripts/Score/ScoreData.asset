@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bd67e332bf69ef4d9c0eaf8e791b75e, type: 3}
+  m_Name: ScoreData
+  m_EditorClassIdentifier: 
+  highScores:
+  - name: 4b004c003900
+    score: 48000
+  - name: 430043004d00
+    score: 47000
+  - name: 500042004600
+    score: 45000
+  - name: 450042005000
+    score: 35000
+  - name: 500043004600
+    score: 34000
+  playerName: AMK
+  startingLivesAmount: 3
+  currentLives: 0
+  currentScore: 0
+  currentLevel: 1
+  gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
