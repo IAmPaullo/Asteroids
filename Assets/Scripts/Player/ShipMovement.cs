@@ -69,11 +69,14 @@ public class ShipMovement : MonoBehaviour
     }
 
 
+    private void Update()
+    {
+        ApplyRotation();
 
+    }
     private void FixedUpdate()
     {
         ApplyThrust();
-        ApplyRotation();
     }
 
     private void HandleRotationInput(Vector2 input)
@@ -102,7 +105,7 @@ public class ShipMovement : MonoBehaviour
             thrustInputValue = 0f;
         }
 
-        float thrust = Mathf.Clamp(thrustInputValue * thrustSpeed * Time.fixedDeltaTime, 0f, maxThrustValue);
+        float thrust = Mathf.Clamp(thrustInputValue * thrustSpeed * Time.deltaTime, 0f, maxThrustValue);
         rigidBody.linearVelocity = transform.up * thrust;
     }
 
@@ -110,8 +113,4 @@ public class ShipMovement : MonoBehaviour
     {
         transform.Rotate(0, 0, targetRotation);
     }
-
-
-
-
 }

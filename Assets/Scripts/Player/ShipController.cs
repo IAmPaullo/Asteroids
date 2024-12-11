@@ -21,8 +21,6 @@ public class ShipController : MonoBehaviour
         }
     }
 
-
-
     private void OnEnable()
     {
         if (inputReader != null)
@@ -85,7 +83,7 @@ public class ShipController : MonoBehaviour
     private void OnShootInput()
     {
         if (!isAlive) return;
-        gameEvents.OnShoot();
+        gameEvents.PlayerShoot();
     }
 
     private void OnThrustInput()

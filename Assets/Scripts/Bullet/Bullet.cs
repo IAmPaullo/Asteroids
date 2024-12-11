@@ -17,6 +17,8 @@ public class Bullet : MonoBehaviour
     //implement bullet sprite
     public void InitializeBullet(ShipWeaponSystem spawner, Vector3 position, Vector2 direction, float speed = 10f, bool isEnemyBullet = false)
     {
+        //essa porra ta fudendo o parent
+        transform.SetParent(null);
         this.spawner = spawner;
         this.direction = direction;
         transform.position = position;

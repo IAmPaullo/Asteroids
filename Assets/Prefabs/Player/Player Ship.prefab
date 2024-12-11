@@ -83,8 +83,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ca33d2375c3694e8b9281abc907437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameEvents: {fileID: 11400000, guid: 48c90132a2c43fa4c819be8a15698edc, type: 2}
   gunConfiguration: {fileID: 11400000, guid: e1f4d71d880225440beb79d829eccfab, type: 2}
   bulletPoolParent: {fileID: 3794429774578084713}
+  bulletSpawnPosition: {fileID: 3921507250034080531}
 --- !u!114 &7345638825917064793
 MonoBehaviour:
   m_ObjectHideFlags: 0

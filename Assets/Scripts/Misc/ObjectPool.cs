@@ -41,9 +41,11 @@ public class ObjectPool<T> where T : MonoBehaviour
         }
     }
 
-    public void ReturnObject(T obj)
+    public void ReturnObject(T obj, Transform parent = null)
     {
+        obj.transform.SetParent(parent);
         obj.gameObject.SetActive(false);
         pool.Enqueue(obj);
     }
+
 }

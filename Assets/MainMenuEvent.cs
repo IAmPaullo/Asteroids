@@ -21,8 +21,6 @@ public class MainMenuEvent : MonoBehaviour
         {
             menuButtons[i].RegisterCallback<ClickEvent>(OnAllButtonsClick);
         }
-
-
     }
 
     private void OnDisable()

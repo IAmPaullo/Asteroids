@@ -1,0 +1,51 @@
+.header_main {
+    font-size: 50px;
+    -unity-text-outline-color: rgba(0, 0, 0, 0.21);
+    color: rgb(255, 255, 255);
+    background-image: none;
+}
+
+.btn-main {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    flex-grow: 1;
+    height: 52px;
+    font-size: 24px;
+    background-color: rgb(226, 137, 45);
+    border-left-color: rgb(226, 137, 45);
+    border-right-color: rgb(226, 137, 45);
+    border-top-color: rgb(226, 137, 45);
+    border-bottom-color: rgb(226, 137, 45);
+}
+
+.slot-icon {
+    flex-grow: 1;
+    width: 150px;
+    height: 150px;
+    max-width: 150px;
+    max-height: 150px;
+    min-width: 50px;
+    min-height: 50px;
+    border-left-color: rgb(75, 75, 75);
+    border-right-color: rgb(75, 75, 75);
+    border-top-color: rgb(75, 75, 75);
+    border-bottom-color: rgb(75, 75, 75);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+}
+
+.grid {
+    flex-grow: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 894px;
+    justify-content: space-evenly;
+}

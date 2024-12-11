@@ -18,6 +18,7 @@ public class GameEvents : ScriptableObject
     #endregion
 
     #region Player Events
+    public event Action OnPlayerShoot;
     public event Action OnPlayerDamaged;
     public event Action OnPlayerDeath;
     public event Action<int> OnAsteroidDestroyed;
@@ -55,7 +56,10 @@ public class GameEvents : ScriptableObject
     {
         OnShootSound?.Invoke();
     }
-
+    public void PlayerShoot()
+    {
+        OnPlayerShoot?.Invoke();
+    }
     public void PlayerDamaged()
     {
         OnPlayerDamaged?.Invoke();
