@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eddf1535e792e064eab749bd29d4bd38, type: 3}
+  m_Name: Ship1
+  m_EditorClassIdentifier: 
+  ID: 535368b4-499c-4c91-a821-04fa4f40219d
+  FriendlyName: Default Ship
+  Description: Default pica ship
+  SellPrice: 0
+  Icon: {fileID: 0}
+  SlotDimension:
+    Height: 0
+    Width: 0

@@ -28,7 +28,45 @@
                 </engine:VisualElement>
             </engine:VisualElement>
             <engine:VisualElement name="Inventory" style="flex-grow: 1; align-items: center; justify-content: center; margin-top: 0; margin-right: 20px; margin-bottom: 0; margin-left: 0; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
-                <engine:VisualElement name="Grid" class="grid">
+                <engine:VisualElement name="Grid" class="grid" style="justify-content: center;">
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
+                    <engine:VisualElement name="SlotIcon" class="slot-icon" />
                     <engine:VisualElement name="SlotIcon" class="slot-icon" />
                     <engine:VisualElement name="SlotIcon" class="slot-icon" />
                     <engine:VisualElement name="SlotIcon" class="slot-icon" />
