@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
-
+[HelpURL("https://www.whatupgames.com/blog/code-the-grid-based-inventory-system")]
 public class PlayerInventory : MonoBehaviour
 {
     public static PlayerInventory Instance;
@@ -17,9 +17,11 @@ public class PlayerInventory : MonoBehaviour
     private bool m_IsInventoryReady;
     public static Dimensions SlotDimension { get; private set; }
 
-
     public List<StoredItem> StoredItems = new();
     public Dimensions InventoryDimensions;
+
+    private VisualElement m_Telegraph;
+
 
 
     private void Awake()
@@ -69,10 +71,10 @@ public class PlayerInventory : MonoBehaviour
         m_InventoryGrid = m_Root.Q<VisualElement>("Grid");
 
         VisualElement itemDetails = m_Root.Q<VisualElement>("ItemDetails");
-        m_ItemDetailHeader = itemDetails.Q<Label>("Header");
-        m_ItemDetailBody = itemDetails.Q<Label>("Body");
+        m_ItemDetailHeader = itemDetails.Q<Label>("ItemName");
+        m_ItemDetailBody = itemDetails.Q<Label>("ItemDescription");
         m_ItemDetailPrice = itemDetails.Q<Label>("SellPrice");
-
+        ConfigureInventoryTelegraph();
         await UniTask.WaitForEndOfFrame();
 
         ConfigureSlotDimensions();
@@ -88,6 +90,26 @@ public class PlayerInventory : MonoBehaviour
             Width = Mathf.RoundToInt(firstSlot.worldBound.width),
             Height = Mathf.RoundToInt(firstSlot.worldBound.height)
         };
+    }
+    private void ConfigureInventoryTelegraph()
+    {
+        m_Telegraph = new VisualElement
+        {
+            name = "Telegraph",
+            style =
+            {
+                position = Position.Absolute,
+                visibility = Visibility.Hidden,
+            }
+        };
+        m_Telegraph.AddToClassList("slot-icon-highlighted");
+        AddItemToInventoryGrid(m_Telegraph);
+    }
+    public static void UpdateItemDetails(ItemDefinition item)
+    {
+        m_ItemDetailHeader.text = item.FriendlyName;
+        m_ItemDetailBody.text = item.Description;
+        m_ItemDetailPrice.text = item.SellPrice.ToString();
     }
     private async Task<bool> GetPositionForItem(VisualElement newItem)
     {
@@ -111,6 +133,42 @@ public class PlayerInventory : MonoBehaviour
             }
         }
         return false;
+    }
+    public (bool canPlace, Vector2 position) ShowPlacementTarget(ItemVisual draggedItem)
+    {
+        if (!m_InventoryGrid.layout.Contains(new Vector2(draggedItem.localBound.xMax,
+            draggedItem.localBound.yMax))) // is out of the edge?
+        {
+            m_Telegraph.style.visibility = Visibility.Hidden;
+            return (canPlace: false, position: Vector2.zero);
+        }
+
+        VisualElement targetSlot = m_InventoryGrid.Children().Where(x =>
+            x.layout.Overlaps(draggedItem.layout) && x != draggedItem).OrderBy(x =>
+            Vector2.Distance(x.worldBound.position,
+            draggedItem.worldBound.position)).First(); //Finds the closest inventory grid slot relative to
+                                                       //the dragged item by checking for all overlapping elements and sorting by distance.
+
+        m_Telegraph.style.width = draggedItem.style.width;
+        m_Telegraph.style.height = draggedItem.style.height;
+
+
+        SetItemPosition(m_Telegraph, new Vector2(targetSlot.layout.position.x,
+            targetSlot.layout.position.y));
+
+        m_Telegraph.style.visibility = Visibility.Visible;
+
+        var overlappingItems = StoredItems.Where(x => x.RootVisual != null &&
+            x.RootVisual.layout.Overlaps(m_Telegraph.layout)).ToArray();  //Check whether the target location of the dragged item is
+                                                                          //overlapping any other ItemVisuals,
+                                                                          //and if so returns false and Vector2.zero.
+
+        if (overlappingItems.Length > 1)
+        {
+            m_Telegraph.style.visibility = Visibility.Hidden;
+            return (canPlace: false, position: Vector2.zero);
+        }
+        return (canPlace: true, targetSlot.worldBound.position); // everything went well and you can place the item
     }
     private static void SetItemPosition(VisualElement element, Vector2 vector)
     {
